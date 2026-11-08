@@ -7,14 +7,14 @@ $evidenceRoot=(Resolve-Path -LiteralPath $EvidenceDirectory).Path
 if(-not $CodexHome){$CodexHome=if($env:CODEX_HOME){$env:CODEX_HOME}else{Join-Path ([Environment]::GetFolderPath('UserProfile')) '.codex'}}
 $desktopHomePath=(Resolve-Path -LiteralPath $CodexHome).Path
 if(-not (Test-Path -LiteralPath (Join-Path $desktopHomePath 'state_5.sqlite')) -or -not (Test-Path -LiteralPath (Join-Path $desktopHomePath 'sessions'))){throw 'DESKTOP_NATIVE_HOME_REQUIRED'}
-$manifest=Get-Content -Raw -LiteralPath (Join-Path $programRoot 'MANIFEST.json')|ConvertFrom-Json
+$manifest=Get-Content -Encoding UTF8 -Raw -LiteralPath (Join-Path $programRoot 'MANIFEST.json')|ConvertFrom-Json
 if($manifest.kind -ne 'qq-agent-clean-program-release'){throw 'SEALED_PROGRAM_REQUIRED'}
 foreach($entry in $manifest.files){$actual=Get-ProgramSha256 (Join-Path $programRoot $entry.file);if($actual -ne $entry.sha256){throw 'SEALED_PROGRAM_CHANGED'}}
-$active=Get-Content -Raw -LiteralPath (Join-Path $dataRoot 'business\active.json')|ConvertFrom-Json
+$active=Get-Content -Encoding UTF8 -Raw -LiteralPath (Join-Path $dataRoot 'business\active.json')|ConvertFrom-Json
 $business=Join-Path $dataRoot ('business\'+$active.botId)
 $configFile=Join-Path $business 'config.local.json'
-$config=Get-Content -Raw -LiteralPath $configFile|ConvertFrom-Json
-$service=Get-Content -Raw -LiteralPath (Join-Path $business 'service.json')|ConvertFrom-Json
+$config=Get-Content -Encoding UTF8 -Raw -LiteralPath $configFile|ConvertFrom-Json
+$service=Get-Content -Encoding UTF8 -Raw -LiteralPath (Join-Path $business 'service.json')|ConvertFrom-Json
 if($service.state -ne 'stopped'){throw 'STOP_ORIGINAL_BUSINESS_BEFORE_CONFIGURING'}
 $nodePath=(Get-Command node.exe -ErrorAction Stop).Source
 if($nodePath -match '[\\/](?:\.cache[\\/]codex-runtimes|OpenAI[\\/]Codex[\\/]runtimes)(?:[\\/]|$)'){throw 'PUBLIC_NODE_REQUIRED'}
@@ -42,7 +42,7 @@ New-Item -ItemType Directory -Path $backupRoot|Out-Null
 Copy-Item -LiteralPath $configFile -Destination (Join-Path $backupRoot 'config.local.json')
 if(Test-Path -LiteralPath $settingsFile){Copy-Item -LiteralPath $settingsFile -Destination (Join-Path $backupRoot 'native-permission-settings.json')}
 $hadHooks=Test-Path -LiteralPath $hookFile
-if($hadHooks){Copy-Item -LiteralPath $hookFile -Destination (Join-Path $backupRoot 'hooks.json');$hooks=Get-Content -Raw -LiteralPath $hookFile|ConvertFrom-Json}else{$hooks=[pscustomobject]@{hooks=[pscustomobject]@{}}}
+if($hadHooks){Copy-Item -LiteralPath $hookFile -Destination (Join-Path $backupRoot 'hooks.json');$hooks=Get-Content -Encoding UTF8 -Raw -LiteralPath $hookFile|ConvertFrom-Json}else{$hooks=[pscustomobject]@{hooks=[pscustomobject]@{}}}
 if(-not $hooks.PSObject.Properties['hooks']){$hooks|Add-Member -NotePropertyName hooks -NotePropertyValue ([pscustomobject]@{})}
 if($hooks.hooks -isnot [pscustomobject]){throw 'EXISTING_HOOKS_SHAPE_INVALID'}
 $events=@(@{name='PermissionRequest';timeout=330;status='QQ native approval: PermissionRequest'},@{name='PostToolUse';timeout=20;status='QQ native approval: tool result'},@{name='Interrupt';timeout=3;status='QQ native approval: interrupted request'})

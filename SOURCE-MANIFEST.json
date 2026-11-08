@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "kind": "qq-agent-open-source-release",
-  "version": "1.1.0-g1.6",
+  "version": "1.1.0-g1.7",
   "containsUserData": false,
   "containsDependencies": false,
   "files": [
@@ -68,12 +68,12 @@
     {
       "file": "package-lock.json",
       "bytes": 1680,
-      "sha256": "511dbf8efe11e9215b23c2a24581052b3352b607a0ed5a0965c0c88767589b39"
+      "sha256": "002f483bc496d3958c7f87d8d06c4a274beb38e53b970a038689cf79c0bb0b3c"
     },
     {
       "file": "package.json",
       "bytes": 992,
-      "sha256": "6f43de70b2dbf0155afdb4956521a72303c814e4c4af31dd66d4b3e9fac09a78"
+      "sha256": "ae0b190d2bcd2aa826c254c50b22715dfeb88c9512d31ea20d0454775084abb2"
     },
     {
       "file": "packages/adapters/codex/offline-adapter.mjs",
@@ -722,13 +722,13 @@
     },
     {
       "file": "scripts/Desktop-AutoConnect.psm1",
-      "bytes": 5176,
-      "sha256": "0487935756e7c8ac019d71f1c84426460bb7154aab0689e7ca5c4859a3eef426"
+      "bytes": 5266,
+      "sha256": "34811d0e31462947601a2daa21135bbdc7ba0ba4adad5b446bc2c0ee8ecd525f"
     },
     {
       "file": "scripts/Desktop-Notify.ps1",
-      "bytes": 626,
-      "sha256": "653e42b0709a1acd3078af21f849bfc7bd641c99ac74b50110b6d20073cd37de"
+      "bytes": 641,
+      "sha256": "eb1f78fb8872536d8d7e44c97e0f9ccbb088139f82f950f451723c186a7f495e"
     },
     {
       "file": "scripts/Desktop-StartEvents.cs",
@@ -737,13 +737,13 @@
     },
     {
       "file": "scripts/Enable-CodexAutoConnect.ps1",
-      "bytes": 2875,
-      "sha256": "d3b24e1f368f13040e5e2d38e6ef13150def3926f4c27f8e76c8bedc61d5f936"
+      "bytes": 2890,
+      "sha256": "f89c77f3925d747e7938128062ed54df0e22b5e1538f5c01b958099bfd8bfb52"
     },
     {
       "file": "scripts/Enable-Native-DesktopApproval.ps1",
-      "bytes": 7483,
-      "sha256": "3f7cf205d2a8a3963b5b457078912d7194624409ca044c2fa129f68986d21746"
+      "bytes": 7558,
+      "sha256": "c367e47c314239d509abfedb19c66275dd0756c849c5031b70713146a3c3e3f0"
     },
     {
       "file": "scripts/Initialize-Cache.ps1",
@@ -752,8 +752,8 @@
     },
     {
       "file": "scripts/Install.ps1",
-      "bytes": 1060,
-      "sha256": "171d352b5ee14d6218cdb5e665b8f1782ea21a0d75b97e3ff5187542e36a24c9"
+      "bytes": 1075,
+      "sha256": "376ef6152932fbd8c9671602a4738d547fcc19eee3646a0e6e95424c05373bf3"
     },
     {
       "file": "scripts/Read-NativeApprovalOwner.mjs",
@@ -762,23 +762,23 @@
     },
     {
       "file": "scripts/Resolve-DataDirectory.ps1",
-      "bytes": 654,
-      "sha256": "a8363f6ffb51812bb9cc7ca51aaa303cd10d93fafcb50261167e9152ee0ea5fa"
+      "bytes": 1157,
+      "sha256": "68023eb325b5c1d05f8cff78b48e798fa4a2d8dab16af90286c81ed851f22fbc"
     },
     {
       "file": "scripts/Start-Console.ps1",
-      "bytes": 2722,
-      "sha256": "336345c853953efb405f654b0fa2273183cdb8d6c36e66330e24bfb638eda2f3"
+      "bytes": 2752,
+      "sha256": "638ed33537e5dd98c6b13622766764ba64bd7f9f3b6f8272bfca17832c946200"
     },
     {
       "file": "scripts/Stop-Console.ps1",
-      "bytes": 1075,
-      "sha256": "46e4eb04ae1b7d25571154e39659053dabb4348c956f4a885c76452646ca3881"
+      "bytes": 1102,
+      "sha256": "ada112f469f4a54c44bfd5b40784cfb269561e1754305f1540c6fff0a055cb1b"
     },
     {
       "file": "scripts/Watch-CodexStart.ps1",
-      "bytes": 2781,
-      "sha256": "df8f64da937f2ff846364f9ea07d1a8634e40c148141f1de4b8afd2e9759397e"
+      "bytes": 2796,
+      "sha256": "225ddf17f555e6bc43538678a5fa7003e90443681f7fd83a5d782f418cf2c25c"
     },
     {
       "file": "scripts/build-archives.mjs",
@@ -1239,6 +1239,11 @@
       "file": "tests/user-data-transfer.test.mjs",
       "bytes": 10100,
       "sha256": "ee9cabd7151cd83b490b06edba65efadf0f97430062b7e644c9001cb4f90494d"
+    },
+    {
+      "file": "tests/windows-json-encoding.test.mjs",
+      "bytes": 6653,
+      "sha256": "5a1a73e4890fa12ed339f335df26ff47580c7495684a2965a60c62388e707f3a"
     },
     {
       "file": "tests/windows-known-folders.test.mjs",

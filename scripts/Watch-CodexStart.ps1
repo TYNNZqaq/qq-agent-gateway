@@ -3,7 +3,7 @@ $ErrorActionPreference='Stop'
 Import-Module (Join-Path $PSScriptRoot 'Desktop-AutoConnect.psm1') -Force
 . (Join-Path $PSScriptRoot 'Initialize-Cache.ps1') -CacheDataDirectory $RuntimeDirectory
 $RuntimeDirectory=& (Join-Path $PSScriptRoot 'Resolve-DataDirectory.ps1') -RuntimeDirectory $RuntimeDirectory
-$identity=Get-Content -LiteralPath (Join-Path $RuntimeDirectory 'instance.json') -Raw|ConvertFrom-Json
+$identity=Get-Content -Encoding UTF8 -LiteralPath (Join-Path $RuntimeDirectory 'instance.json') -Raw|ConvertFrom-Json
 if($identity.instanceId -notmatch '^[a-f0-9-]{36}$'){throw 'APPLICATION_IDENTITY_INVALID'}
 $mutex=[Threading.Mutex]::new($false,('Local\QQAgent.CodexStart.'+$identity.instanceId+'.'+[Security.Principal.WindowsIdentity]::GetCurrent().User.Value))
 $owned=$false;$events=$null

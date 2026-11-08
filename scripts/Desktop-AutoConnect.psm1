@@ -17,10 +17,10 @@ function Set-QQAutoConnectJson([string]$File,$Value) {
   }finally{if(Test-Path -LiteralPath $temp){Remove-Item -LiteralPath $temp}}
 }
 function Get-QQAutoConnectPreference([string]$RuntimeDirectory) {
-  $identity=Get-Content -LiteralPath (Join-Path $RuntimeDirectory 'instance.json') -Raw|ConvertFrom-Json
+  $identity=Get-Content -Encoding UTF8 -LiteralPath (Join-Path $RuntimeDirectory 'instance.json') -Raw|ConvertFrom-Json
   $file=Join-Path $RuntimeDirectory 'desktop-autoconnect.json'
   if(!(Test-Path -LiteralPath $file)){return $false}
-  $preference=Get-Content -LiteralPath $file -Raw|ConvertFrom-Json
+  $preference=Get-Content -Encoding UTF8 -LiteralPath $file -Raw|ConvertFrom-Json
   return ($preference.schemaVersion -eq 1 -and $preference.enabled -eq $true -and $preference.instanceId -eq $identity.instanceId -and $preference.hostId -eq $identity.hostId)
 }
 function Test-QQDesktopFacts($Facts,[int]$SessionId,[string]$OwnerSid) {
@@ -43,12 +43,12 @@ function Get-QQDesktopClient([int]$ClientPid=0) {
 function Test-QQDesktopManualStop([string]$RuntimeDirectory,[long]$ClientStartedAt) {
   $metadataFile=Join-Path $RuntimeDirectory 'management-service.json'
   if(Test-Path -LiteralPath $metadataFile){
-    $metadata=Get-Content -LiteralPath $metadataFile -Raw|ConvertFrom-Json
+    $metadata=Get-Content -Encoding UTF8 -LiteralPath $metadataFile -Raw|ConvertFrom-Json
     if($metadata.status -eq 'stopped' -and ([DateTimeOffset](Get-Item -LiteralPath $metadataFile).LastWriteTimeUtc).ToUnixTimeMilliseconds() -ge $ClientStartedAt){return $true}
   }
   $activeFile=Join-Path $RuntimeDirectory 'business\active.json'
   if(!(Test-Path -LiteralPath $activeFile)){return $false}
-  $active=Get-Content -LiteralPath $activeFile -Raw|ConvertFrom-Json
+  $active=Get-Content -Encoding UTF8 -LiteralPath $activeFile -Raw|ConvertFrom-Json
   if($active.botId -notmatch '^[a-f0-9-]{36}$' -or $active.configRelative -ne ($active.botId+'/config.local.json')){throw 'BUSINESS_ACTIVE_REFERENCE_INVALID'}
   $directory=Join-Path (Join-Path $RuntimeDirectory 'business') $active.botId
   $requestFile=Join-Path $directory 'stop.request.json'
@@ -56,8 +56,8 @@ function Test-QQDesktopManualStop([string]$RuntimeDirectory,[long]$ClientStarted
   if(([DateTimeOffset](Get-Item -LiteralPath $requestFile).LastWriteTimeUtc).ToUnixTimeMilliseconds() -lt $ClientStartedAt){return $false}
   $serviceFile=Join-Path $directory 'service.json'
   if(!(Test-Path -LiteralPath $serviceFile)){return $false}
-  $request=Get-Content -LiteralPath $requestFile -Raw|ConvertFrom-Json
-  $service=Get-Content -LiteralPath $serviceFile -Raw|ConvertFrom-Json
+  $request=Get-Content -Encoding UTF8 -LiteralPath $requestFile -Raw|ConvertFrom-Json
+  $service=Get-Content -Encoding UTF8 -LiteralPath $serviceFile -Raw|ConvertFrom-Json
   return ($request.instance -eq $service.instance)
 }
 function Get-QQPowerShellArguments([string]$Script,[string]$RuntimeDirectory) {

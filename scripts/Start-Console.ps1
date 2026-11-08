@@ -10,7 +10,7 @@ $nodePath=(Get-Command node.exe -ErrorAction Stop).Source
 $version=& $nodePath --version
 if($version -notmatch '^v(\d+)\.' -or [int]$Matches[1] -lt 24){throw 'NODE_24_REQUIRED'}
 if(Test-Path -LiteralPath $stateFile){
-  $previous=Get-Content -LiteralPath $stateFile -Raw|ConvertFrom-Json
+  $previous=Get-Content -Encoding UTF8 -LiteralPath $stateFile -Raw|ConvertFrom-Json
   if($previous.status -eq 'running'){
     $confirmed=$false
     if($previous.url -match '^http://127\.0\.0\.1:[0-9]+$'){
@@ -29,7 +29,7 @@ for($attempt=0;$attempt -lt 40;$attempt++){
   if($child.HasExited){throw 'MANAGEMENT_START_FAILED'}
   if(Test-Path -LiteralPath $stateFile){
     try{
-      $current=Get-Content -LiteralPath $stateFile -Raw|ConvertFrom-Json
+      $current=Get-Content -Encoding UTF8 -LiteralPath $stateFile -Raw|ConvertFrom-Json
       if($current.pid -eq $child.Id -and $current.url -match '^http://127\.0\.0\.1:[0-9]+$'){
         $health=Invoke-RestMethod -Uri ($current.url+'/health') -TimeoutSec 2
         if($health.service -eq 'qq-agent-management' -and $health.instanceId -eq $current.instance){if($OpenBrowser){Start-Process $current.url};[pscustomobject]@{status='running';url=$current.url;reused=$false;executionEnabled=$false}|ConvertTo-Json -Compress;exit 0}

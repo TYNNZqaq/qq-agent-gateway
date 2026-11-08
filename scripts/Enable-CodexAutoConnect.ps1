@@ -5,7 +5,7 @@ Import-Module (Join-Path $PSScriptRoot 'Desktop-AutoConnect.psm1') -Force
 $node=Get-QQPublicNode
 $env:PATH=(Split-Path -Parent $node)+[IO.Path]::PathSeparator+$env:PATH
 $RuntimeDirectory=& (Join-Path $PSScriptRoot 'Resolve-DataDirectory.ps1') -RuntimeDirectory $RuntimeDirectory
-$identity=Get-Content -LiteralPath (Join-Path $RuntimeDirectory 'instance.json') -Raw|ConvertFrom-Json
+$identity=Get-Content -Encoding UTF8 -LiteralPath (Join-Path $RuntimeDirectory 'instance.json') -Raw|ConvertFrom-Json
 if($identity.kind -ne 'qq-agent-user-instance' -or $identity.instanceId -notmatch '^[a-f0-9-]{36}$' -or $identity.hostId -notmatch '^[a-f0-9-]{36}$'){throw 'APPLICATION_IDENTITY_INVALID'}
 $startup=[Environment]::GetFolderPath([Environment+SpecialFolder]::Startup)
 if(!$startup -or !(Test-Path -LiteralPath $startup -PathType Container)){throw 'USER_STARTUP_DIRECTORY_UNAVAILABLE'}

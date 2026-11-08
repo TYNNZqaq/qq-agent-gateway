@@ -1,0 +1,29 @@
+{
+  "name": "qq-multi-agent-gateway",
+  "version": "1.1.0-g1.6",
+  "description": "Local QQ gateway for Codex desktop, native session control and paired remote interaction.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TYNNZqaq/qq-agent-gateway.git"
+  },
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "test": "node scripts/run-tests.mjs",
+    "check": "node scripts/check-boundaries.mjs",
+    "check:config": "node scripts/verify-configuration.mjs",
+    "audit": "node scripts/check-boundaries.mjs",
+    "start": "node packages/host-control/cli.mjs",
+    "install:local": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Install.ps1",
+    "release:source": "node scripts/build-source.mjs",
+    "release:program": "node scripts/build-release.mjs",
+    "release:archives": "node scripts/build-archives.mjs"
+  },
+  "dependencies": {
+    "@tencent-connect/qqbot-nodejs": "1.0.5"
+  }
+}

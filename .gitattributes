@@ -1,0 +1,3 @@
+# Preserve the bytes recorded in the release manifests across Git checkouts.
+# Disabling newline conversion does not disable text diffs.
+* -text

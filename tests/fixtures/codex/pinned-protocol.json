@@ -1,0 +1,1696 @@
+{
+  "schemaVersion": 1,
+  "protocolVersion": "codex-app-server/0.163.0-alpha.11.2",
+  "evidence": "Pinned locally generated schema; synthetic values only. Does not verify real calls.",
+  "schemas": {
+    "initialize": {
+      "definitions": {
+        "ClientInfo": {
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "version": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "name",
+            "version"
+          ],
+          "type": "object"
+        },
+        "InitializeCapabilities": {
+          "properties": {
+            "experimentalApi": {
+              "type": "boolean"
+            },
+            "explicitGatewayOauth": {
+              "type": "boolean"
+            },
+            "extensions": {
+              "additionalProperties": true,
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "mcpServerOpenaiFormElicitation": {
+              "type": "boolean"
+            },
+            "optOutNotificationMethods": {
+              "items": {
+                "type": "string"
+              },
+              "type": [
+                "array",
+                "null"
+              ]
+            },
+            "requestAttestation": {
+              "type": "boolean"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "properties": {
+        "capabilities": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/InitializeCapabilities"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "clientInfo": {
+          "$ref": "#/definitions/ClientInfo"
+        }
+      },
+      "required": [
+        "clientInfo"
+      ],
+      "type": "object"
+    },
+    "open": {
+      "definitions": {
+        "AbsolutePathBuf": {
+          "type": "string"
+        },
+        "ApprovalsReviewer": {
+          "enum": [
+            "user",
+            "auto_review",
+            "guardian_subagent"
+          ],
+          "type": "string"
+        },
+        "AskForApproval": {
+          "oneOf": [
+            {
+              "enum": [
+                "untrusted",
+                "on-request",
+                "never"
+              ],
+              "type": "string"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "granular": {
+                  "properties": {
+                    "mcp_elicitations": {
+                      "type": "boolean"
+                    },
+                    "request_permissions": {
+                      "type": "boolean"
+                    },
+                    "rules": {
+                      "type": "boolean"
+                    },
+                    "sandbox_approval": {
+                      "type": "boolean"
+                    },
+                    "skill_approval": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "mcp_elicitations",
+                    "rules",
+                    "sandbox_approval"
+                  ],
+                  "type": "object"
+                }
+              },
+              "required": [
+                "granular"
+              ],
+              "type": "object"
+            }
+          ]
+        },
+        "CapabilityRootLocation": {
+          "oneOf": [
+            {
+              "properties": {
+                "environmentId": {
+                  "type": "string"
+                },
+                "path": {
+                  "type": "string"
+                },
+                "type": {
+                  "enum": [
+                    "environment"
+                  ],
+                  "type": "string"
+                }
+              },
+              "required": [
+                "environmentId",
+                "path",
+                "type"
+              ],
+              "type": "object"
+            }
+          ]
+        },
+        "DynamicToolNamespaceTool": {
+          "oneOf": [
+            {
+              "properties": {
+                "deferLoading": {
+                  "type": "boolean"
+                },
+                "inputSchema": true,
+                "name": {
+                  "type": "string"
+                },
+                "type": {
+                  "enum": [
+                    "function"
+                  ],
+                  "type": "string"
+                }
+              },
+              "required": [
+                "description",
+                "inputSchema",
+                "name",
+                "type"
+              ],
+              "type": "object"
+            }
+          ]
+        },
+        "DynamicToolSpec": {
+          "oneOf": [
+            {
+              "properties": {
+                "deferLoading": {
+                  "type": "boolean"
+                },
+                "inputSchema": true,
+                "name": {
+                  "type": "string"
+                },
+                "type": {
+                  "enum": [
+                    "function"
+                  ],
+                  "type": "string"
+                }
+              },
+              "required": [
+                "description",
+                "inputSchema",
+                "name",
+                "type"
+              ],
+              "type": "object"
+            },
+            {
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "tools": {
+                  "items": {
+                    "$ref": "#/definitions/DynamicToolNamespaceTool"
+                  },
+                  "type": "array"
+                },
+                "type": {
+                  "enum": [
+                    "namespace"
+                  ],
+                  "type": "string"
+                }
+              },
+              "required": [
+                "description",
+                "name",
+                "tools",
+                "type"
+              ],
+              "type": "object"
+            }
+          ]
+        },
+        "LegacyAppPathString": {
+          "type": "string"
+        },
+        "MultiAgentMode": {
+          "oneOf": [
+            {
+              "enum": [
+                "explicitRequestOnly",
+                "proactive"
+              ],
+              "type": "string"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "custom": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "custom"
+              ],
+              "type": "object"
+            }
+          ]
+        },
+        "Personality": {
+          "enum": [
+            "none",
+            "friendly",
+            "pragmatic"
+          ],
+          "type": "string"
+        },
+        "SandboxMode": {
+          "enum": [
+            "read-only",
+            "workspace-write",
+            "danger-full-access"
+          ],
+          "type": "string"
+        },
+        "SelectedCapabilityRoot": {
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "location": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/CapabilityRootLocation"
+                }
+              ]
+            }
+          },
+          "required": [
+            "id",
+            "location"
+          ],
+          "type": "object"
+        },
+        "ThreadHistoryMode": {
+          "enum": [
+            "legacy",
+            "paginated"
+          ],
+          "type": "string"
+        },
+        "ThreadSource": {
+          "type": "string"
+        },
+        "ThreadStartSource": {
+          "enum": [
+            "startup",
+            "clear"
+          ],
+          "type": "string"
+        },
+        "TurnEnvironmentParams": {
+          "properties": {
+            "cwd": {
+              "$ref": "#/definitions/LegacyAppPathString"
+            },
+            "environmentId": {
+              "type": "string"
+            },
+            "runtimeWorkspaceRoots": {
+              "items": {
+                "$ref": "#/definitions/LegacyAppPathString"
+              },
+              "type": [
+                "array",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "cwd",
+            "environmentId"
+          ],
+          "type": "object"
+        }
+      },
+      "properties": {
+        "approvalPolicy": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/AskForApproval"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "approvalsReviewer": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ApprovalsReviewer"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "baseInstructions": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "config": {
+          "additionalProperties": true,
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "cwd": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "developerInstructions": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "ephemeral": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "model": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "modelProvider": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "personality": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Personality"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "sandbox": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/SandboxMode"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "serviceName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "serviceTier": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sessionStartSource": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ThreadStartSource"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "threadSource": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ThreadSource"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "type": "object"
+    },
+    "submit": {
+      "definitions": {
+        "AbsolutePathBuf": {
+          "type": "string"
+        },
+        "AdditionalContextEntry": {
+          "properties": {
+            "kind": {
+              "$ref": "#/definitions/AdditionalContextKind"
+            },
+            "value": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind",
+            "value"
+          ],
+          "type": "object"
+        },
+        "AdditionalContextKind": {
+          "enum": [
+            "untrusted",
+            "application"
+          ],
+          "type": "string"
+        },
+        "ApprovalsReviewer": {
+          "enum": [
+            "user",
+            "auto_review",
+            "guardian_subagent"
+          ],
+          "type": "string"
+        },
+        "AskForApproval": {
+          "oneOf": [
+            {
+              "enum": [
+                "untrusted",
+                "on-request",
+                "never"
+              ],
+              "type": "string"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "granular": {
+                  "properties": {
+                    "mcp_elicitations": {
+                      "type": "boolean"
+                    },
+                    "request_permissions": {
+                      "type": "boolean"
+                    },
+                    "rules": {
+                      "type": "boolean"
+                    },
+                    "sandbox_approval": {
+                      "type": "boolean"
+                    },
+                    "skill_approval": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "mcp_elicitations",
+                    "rules",
+                    "sandbox_approval"
+                  ],
+                  "type": "object"
+                }
+              },
+              "required": [
+                "granular"
+              ],
+              "type": "object"
+            }
+          ]
+        },
+        "ByteRange": {
+          "properties": {
+            "end": {
+              "format": "uint",
+              "minimum": 0,
+              "type": "integer"
+            },
+            "start": {
+              "format": "uint",
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          "required": [
+            "end",
+            "start"
+          ],
+          "type": "object"
+        },
+        "CollaborationMode": {
+          "properties": {
+            "mode": {
+              "$ref": "#/definitions/ModeKind"
+            },
+            "settings": {
+              "$ref": "#/definitions/Settings"
+            }
+          },
+          "required": [
+            "mode",
+            "settings"
+          ],
+          "type": "object"
+        },
+        "CyberAccessProgram": {
+          "enum": [
+            "standard",
+            "daybreakBlue",
+            "daybreakRed"
+          ],
+          "type": "string"
+        },
+        "FunctionCallOutputBody": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "items": {
+                "$ref": "#/definitions/FunctionCallOutputContentItem"
+              },
+              "type": "array"
+            }
+          ]
+        },
+        "FunctionCallOutputContentItem": {
+          "oneOf": [
+            {
+              "properties": {
+                "text": {
+                  "type": "string"
+                },
+                "type": {
+                  "enum": [
+                    "input_text"
+                  ],
+                  "type": "string"
+                }
+              },
+              "required": [
+                "text",
+                "type"
+              ],
+              "type": "object"
+            },
+            {
+              "anyOf": [
+                {
+                  "properties": {
+                    "image_url": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "image_url"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "properties": {
+                    "file_id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "file_id"
+                  ],
+                  "type": "object"
+                }
+              ],
+              "properties": {
+                "detail": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/definitions/ImageDetail"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "type": {
+                  "enum": [
+                    "input_image"
+                  ],
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type"
+              ],
+              "type": "object"
+            },
+            {
+              "properties": {
+                "audio_url": {
+                  "type": "string"
+                },
+                "type": {
+                  "enum": [
+                    "input_audio"
+                  ],
+                  "type": "string"
+                }
+              },
+              "required": [
+                "audio_url",
+                "type"
+              ],
+              "type": "object"
+            },
+            {
+              "properties": {
+                "encrypted_content": {
+                  "type": "string"
+                },
+                "type": {
+                  "enum": [
+                    "encrypted_content"
+                  ],
+                  "type": "string"
+                }
+              },
+              "required": [
+                "encrypted_content",
+                "type"
+              ],
+              "type": "object"
+            }
+          ]
+        },
+        "ImageDetail": {
+          "enum": [
+            "auto",
+            "low",
+            "high",
+            "original"
+          ],
+          "type": "string"
+        },
+        "LegacyAppPathString": {
+          "type": "string"
+        },
+        "ModeKind": {
+          "enum": [
+            "plan",
+            "default"
+          ],
+          "type": "string"
+        },
+        "MultiAgentMode": {
+          "oneOf": [
+            {
+              "enum": [
+                "explicitRequestOnly",
+                "proactive"
+              ],
+              "type": "string"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "custom": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "custom"
+              ],
+              "type": "object"
+            }
+          ]
+        },
+        "NetworkAccess": {
+          "enum": [
+            "restricted",
+            "enabled"
+          ],
+          "type": "string"
+        },
+        "Personality": {
+          "enum": [
+            "none",
+            "friendly",
+            "pragmatic"
+          ],
+          "type": "string"
+        },
+        "ReasoningEffort": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "ReasoningSummary": {
+          "oneOf": [
+            {
+              "enum": [
+                "auto",
+                "concise",
+                "detailed"
+              ],
+              "type": "string"
+            },
+            {
+              "enum": [
+                "none"
+              ],
+              "type": "string"
+            }
+          ]
+        },
+        "SandboxPolicy": {
+          "oneOf": [
+            {
+              "properties": {
+                "type": {
+                  "enum": [
+                    "dangerFullAccess"
+                  ],
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type"
+              ],
+              "type": "object"
+            },
+            {
+              "properties": {
+                "networkAccess": {
+                  "type": "boolean"
+                },
+                "type": {
+                  "enum": [
+                    "readOnly"
+                  ],
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type"
+              ],
+              "type": "object"
+            },
+            {
+              "properties": {
+                "networkAccess": {
+                  "allOf": [
+                    {
+                      "$ref": "#/definitions/NetworkAccess"
+                    }
+                  ]
+                },
+                "type": {
+                  "enum": [
+                    "externalSandbox"
+                  ],
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type"
+              ],
+              "type": "object"
+            },
+            {
+              "properties": {
+                "excludeSlashTmp": {
+                  "type": "boolean"
+                },
+                "excludeTmpdirEnvVar": {
+                  "type": "boolean"
+                },
+                "networkAccess": {
+                  "type": "boolean"
+                },
+                "type": {
+                  "enum": [
+                    "workspaceWrite"
+                  ],
+                  "type": "string"
+                },
+                "writableRoots": {
+                  "items": {
+                    "$ref": "#/definitions/AbsolutePathBuf"
+                  },
+                  "type": "array"
+                }
+              },
+              "required": [
+                "type"
+              ],
+              "type": "object"
+            }
+          ]
+        },
+        "Settings": {
+          "properties": {
+            "developer_instructions": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "model": {
+              "type": "string"
+            },
+            "reasoning_effort": {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/ReasoningEffort"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "model"
+          ],
+          "type": "object"
+        },
+        "TextElement": {
+          "properties": {
+            "byteRange": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/ByteRange"
+                }
+              ]
+            },
+            "placeholder": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "byteRange"
+          ],
+          "type": "object"
+        },
+        "TurnEnvironmentParams": {
+          "properties": {
+            "cwd": {
+              "$ref": "#/definitions/LegacyAppPathString"
+            },
+            "environmentId": {
+              "type": "string"
+            },
+            "runtimeWorkspaceRoots": {
+              "items": {
+                "$ref": "#/definitions/LegacyAppPathString"
+              },
+              "type": [
+                "array",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "cwd",
+            "environmentId"
+          ],
+          "type": "object"
+        },
+        "TurnToolOutput": {
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "namespace": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "output": {
+              "$ref": "#/definitions/FunctionCallOutputBody"
+            },
+            "retain": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "name",
+            "output"
+          ],
+          "type": "object"
+        },
+        "UserInput": {
+          "oneOf": [
+            {
+              "properties": {
+                "text": {
+                  "type": "string"
+                },
+                "text_elements": {
+                  "items": {
+                    "$ref": "#/definitions/TextElement"
+                  },
+                  "type": "array"
+                },
+                "type": {
+                  "enum": [
+                    "text"
+                  ],
+                  "type": "string"
+                }
+              },
+              "required": [
+                "text",
+                "type"
+              ],
+              "type": "object"
+            },
+            {
+              "anyOf": [
+                {
+                  "properties": {
+                    "url": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "url"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "properties": {
+                    "fileId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "fileId"
+                  ],
+                  "type": "object"
+                }
+              ],
+              "properties": {
+                "detail": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/definitions/ImageDetail"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "type": {
+                  "enum": [
+                    "image"
+                  ],
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type"
+              ],
+              "type": "object"
+            },
+            {
+              "properties": {
+                "detail": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/definitions/ImageDetail"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "path": {
+                  "type": "string"
+                },
+                "type": {
+                  "enum": [
+                    "localImage"
+                  ],
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path",
+                "type"
+              ],
+              "type": "object"
+            },
+            {
+              "properties": {
+                "type": {
+                  "enum": [
+                    "audio"
+                  ],
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type",
+                "url"
+              ],
+              "type": "object"
+            },
+            {
+              "properties": {
+                "path": {
+                  "type": "string"
+                },
+                "type": {
+                  "enum": [
+                    "localAudio"
+                  ],
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path",
+                "type"
+              ],
+              "type": "object"
+            },
+            {
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "path": {
+                  "type": "string"
+                },
+                "type": {
+                  "enum": [
+                    "skill"
+                  ],
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name",
+                "path",
+                "type"
+              ],
+              "type": "object"
+            },
+            {
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "path": {
+                  "type": "string"
+                },
+                "type": {
+                  "enum": [
+                    "mention"
+                  ],
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name",
+                "path",
+                "type"
+              ],
+              "type": "object"
+            }
+          ]
+        }
+      },
+      "properties": {
+        "approvalPolicy": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/AskForApproval"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "approvalsReviewer": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ApprovalsReviewer"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "clientUserMessageId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "cwd": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "disabledPluginIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": [
+            "array",
+            "null"
+          ]
+        },
+        "effort": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ReasoningEffort"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "input": {
+          "items": {
+            "$ref": "#/definitions/UserInput"
+          },
+          "type": "array"
+        },
+        "model": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "outputSchema": {},
+        "parentTurnId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "personality": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Personality"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "rootTurnId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sandboxPolicy": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/SandboxPolicy"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "serviceTier": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "serviceTierForTurn": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "summary": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ReasoningSummary"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "threadId": {
+          "type": "string"
+        },
+        "toolOutput": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/TurnToolOutput"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "turnTrigger": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "input",
+        "threadId"
+      ],
+      "type": "object"
+    },
+    "input": {
+      "definitions": {
+        "AdditionalContextEntry": {
+          "properties": {
+            "kind": {
+              "$ref": "#/definitions/AdditionalContextKind"
+            },
+            "value": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind",
+            "value"
+          ],
+          "type": "object"
+        },
+        "AdditionalContextKind": {
+          "enum": [
+            "untrusted",
+            "application"
+          ],
+          "type": "string"
+        },
+        "ByteRange": {
+          "properties": {
+            "end": {
+              "format": "uint",
+              "minimum": 0,
+              "type": "integer"
+            },
+            "start": {
+              "format": "uint",
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          "required": [
+            "end",
+            "start"
+          ],
+          "type": "object"
+        },
+        "ImageDetail": {
+          "enum": [
+            "auto",
+            "low",
+            "high",
+            "original"
+          ],
+          "type": "string"
+        },
+        "TextElement": {
+          "properties": {
+            "byteRange": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/ByteRange"
+                }
+              ]
+            },
+            "placeholder": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "byteRange"
+          ],
+          "type": "object"
+        },
+        "UserInput": {
+          "oneOf": [
+            {
+              "properties": {
+                "text": {
+                  "type": "string"
+                },
+                "text_elements": {
+                  "items": {
+                    "$ref": "#/definitions/TextElement"
+                  },
+                  "type": "array"
+                },
+                "type": {
+                  "enum": [
+                    "text"
+                  ],
+                  "type": "string"
+                }
+              },
+              "required": [
+                "text",
+                "type"
+              ],
+              "type": "object"
+            },
+            {
+              "anyOf": [
+                {
+                  "properties": {
+                    "url": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "url"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "properties": {
+                    "fileId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "fileId"
+                  ],
+                  "type": "object"
+                }
+              ],
+              "properties": {
+                "detail": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/definitions/ImageDetail"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "type": {
+                  "enum": [
+                    "image"
+                  ],
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type"
+              ],
+              "type": "object"
+            },
+            {
+              "properties": {
+                "detail": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/definitions/ImageDetail"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "path": {
+                  "type": "string"
+                },
+                "type": {
+                  "enum": [
+                    "localImage"
+                  ],
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path",
+                "type"
+              ],
+              "type": "object"
+            },
+            {
+              "properties": {
+                "type": {
+                  "enum": [
+                    "audio"
+                  ],
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type",
+                "url"
+              ],
+              "type": "object"
+            },
+            {
+              "properties": {
+                "path": {
+                  "type": "string"
+                },
+                "type": {
+                  "enum": [
+                    "localAudio"
+                  ],
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path",
+                "type"
+              ],
+              "type": "object"
+            },
+            {
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "path": {
+                  "type": "string"
+                },
+                "type": {
+                  "enum": [
+                    "skill"
+                  ],
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name",
+                "path",
+                "type"
+              ],
+              "type": "object"
+            },
+            {
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "path": {
+                  "type": "string"
+                },
+                "type": {
+                  "enum": [
+                    "mention"
+                  ],
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name",
+                "path",
+                "type"
+              ],
+              "type": "object"
+            }
+          ]
+        }
+      },
+      "properties": {
+        "clientUserMessageId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "expectedTurnId": {
+          "type": "string"
+        },
+        "input": {
+          "items": {
+            "$ref": "#/definitions/UserInput"
+          },
+          "type": "array"
+        },
+        "threadId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "expectedTurnId",
+        "input",
+        "threadId"
+      ],
+      "type": "object"
+    },
+    "cancel": {
+      "properties": {
+        "threadId": {
+          "type": "string"
+        },
+        "turnId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "threadId",
+        "turnId"
+      ],
+      "type": "object"
+    },
+    "read": {
+      "properties": {
+        "includeTurns": {
+          "type": "boolean"
+        },
+        "threadId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "threadId"
+      ],
+      "type": "object"
+    },
+    "models": {
+      "properties": {
+        "cursor": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "includeHidden": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "limit": {
+          "format": "uint32",
+          "minimum": 0,
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
+      },
+      "type": "object"
+    },
+    "answer": {
+      "definitions": {
+        "ToolRequestUserInputAnswer": {
+          "properties": {
+            "answers": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "required": [
+            "answers"
+          ],
+          "type": "object"
+        }
+      },
+      "properties": {
+        "answers": {
+          "additionalProperties": {
+            "$ref": "#/definitions/ToolRequestUserInputAnswer"
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "answers"
+      ],
+      "type": "object"
+    }
+  },
+  "sourceDigests": {
+    "v1/InitializeParams": "b55124e7c0f36a1789396daa5578217a92be67f053903696236686e59f6f212e",
+    "v2/ThreadStartParams": "e9c6d3cc18d049bfbc0249add3808fb8e5a27e1a0b5a423767aafbc3859a9428",
+    "v2/TurnStartParams": "835e0d4ca1a0ddc4fb6db1e2b3249dd67f07c50ac2506092ba81543efc92829b",
+    "v2/TurnSteerParams": "857e7a2b061ae46ed6aedea6a5fddd3a6ce14f0334bf7eafaf10d4cbe68ec78b",
+    "v2/TurnInterruptParams": "6dff382dae73d1dbc58406ed045605f647e7a49660e2540fbd2c6c24d60c5f2b",
+    "v2/ThreadReadParams": "dfe040c6ac71d30795b8be3f3ff232e66f362a37f883b491e5d1ea367f470db4",
+    "v2/ModelListParams": "de29a536c00a5b8f46f34dba417dabd93365305571a8ed200e33bea85db68b5a",
+    "ToolRequestUserInputResponse": "5073b245f741fa8ce62ec52e4dd1809b7831f9c4284c279a78abc9b171f8e3f2"
+  },
+  "examples": {
+    "thread": {
+      "id": "synthetic-thread-a",
+      "ephemeral": true
+    },
+    "turn": {
+      "id": "synthetic-turn-a",
+      "status": "inProgress",
+      "items": []
+    },
+    "models": [
+      {
+        "id": "display-only-id",
+        "model": "synthetic-model-a",
+        "hidden": false
+      }
+    ]
+  }
+}

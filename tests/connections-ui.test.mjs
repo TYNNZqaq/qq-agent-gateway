@@ -1,0 +1,32 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+import vm from 'node:vm';
+
+const source=readFileSync(new URL('../packages/management-ui/app.js',import.meta.url),'utf8');
+async function browser(hash='#connections',overrides={}){
+ const nodes=new Map(),listeners=new Map(),calls=[];
+ const node=selector=>{if(!nodes.has(selector))nodes.set(selector,{innerHTML:'',textContent:'',value:'',open:false,hidden:false,disabled:false,isConnected:true,classList:{add(){},remove(){},toggle(){}},setAttribute(){},removeAttribute(){},addEventListener(name,fn){listeners.set(selector+':'+name,fn);},showModal(){this.open=true;},close(){this.open=false;listeners.get(selector+':close')?.();},replaceChildren(){this.innerHTML='';}});return nodes.get(selector);};
+ const data={revision:3,bots:[],agents:[],bindings:[],tools:[],activity:[],codexAccount:{available:true,revision:1,agentId:null,account:{status:'not_checked'},models:[],selectionStatus:'needs_selection'},qqConnection:{available:true,revision:1,state:'unconfigured',credentialConfigured:false},service:{version:'synthetic'},...overrides};
+ const context=vm.createContext({document:{querySelector:node,querySelectorAll:()=>[],addEventListener:(name,fn)=>listeners.set(name,fn),activeElement:{tagName:'BODY'}},history:{replaceState:(_s,_t,url)=>calls.push({navigation:url})},location:{hash,origin:'http://localhost.invalid'},crypto:{randomUUID:()=> 'aaaaaaaa-aaaa-4aaa-aaaa-aaaaaaaaaaaa'},setInterval:()=>0,setTimeout:()=>0,clearTimeout(){},fetch:async(route,options)=>{calls.push({route,options});return {ok:true,json:async()=>route==='/api/bootstrap'?{csrf:'synthetic'}:data};}});
+ vm.runInContext(source,context);await new Promise(resolve=>setImmediate(resolve));
+ const click=async(action,id)=>listeners.get('click')({target:{closest:selector=>selector==='[data-action]'?{dataset:{action,id},disabled:false,isConnected:true}:null},preventDefault(){}});
+ return {context,node,calls,click,html:()=>node('#main').innerHTML};
+}
+test('unified menu is 接入 and renders all three provider choices',async()=>{const b=await browser();assert.match(b.html(),/<h1>接入<\/h1>/);for(const name of ['Codex','Gemini','DSH'])assert.ok(b.html().includes(name));assert.match(b.html(),/data-action="account-login"/);const page=readFileSync(new URL('../packages/management-ui/index.html',import.meta.url),'utf8');assert.match(page,/data-nav="connections"[^>]*>.*?接入/);assert.doesNotMatch(page,/data-nav="account"/);});
+for(const provider of ['gemini','dsh'])test(provider+' visual option can be selected without any login, API or process request',async()=>{const b=await browser(),before=b.calls.filter(x=>x.route).length;await b.click('connection-provider',provider);assert.match(b.html(),/接入已暂缓/);assert.doesNotMatch(b.html(),/data-action="account-login"|data-action="qq-verify"|<input|<form/);assert.equal(b.calls.filter(x=>x.route).length,before);await b.click('connection-provider','codex');assert.match(b.html(),/data-action="account-login"/);assert.equal(b.calls.filter(x=>x.route).length,before);});
+test('legacy account bookmark opens Codex within the unified menu',async()=>{const b=await browser('#account');assert.match(b.html(),/<h1>接入<\/h1>/);assert.match(b.html(),/id="provider-codex"/);assert.match(b.html(),/data-action="account-login"/);});
+test('unknown provider input cannot create an execution surface',async()=>{const b=await browser();await b.click('connection-provider','unknown-tool');assert.match(b.html(),/data-action="account-login"/);assert.doesNotMatch(b.html(),/unknown-tool/);});
+test('local QQ secret form is a password field, empty, and not in persisted state',async()=>{const b=await browser();vm.runInContext("qqCredentialDialog({id:'synthetic',name:'Synthetic Bot'})",b.context);const html=b.node('#dialog-fields').innerHTML;assert.match(html,/id="qq-app-secret" type="password" autocomplete="new-password"/);assert.doesNotMatch(html,/id="qq-app-secret"[^>]*value=/);assert.match(html,/沙箱验证/);});
+
+test('verified migrated bot view reports preserved history and actual live state without asking for new bot credentials',async()=>{
+ const b=await browser('#connections',{codexWork:{verified:true,model:'synthetic-model',verifiedAt:new Date().toISOString()},business:{available:true,configured:true,running:true,qqConnected:true,projects:[],chatModel:'old-chat',workModel:'synthetic-model',migration:{counts:[{name:'chat_sessions',count:4},{name:'chat_messages',count:21}]}}});
+ assert.match(b.html(),/原机器人已连接/);assert.match(b.html(),/4 个聊天会话、21 条聊天记录/);assert.match(b.html(),/data-action="business-stop"/);assert.doesNotMatch(b.html(),/data-action="qq-credentials"|任务执行未启用|接入即将开放/);
+});
+test('fresh instance shows explicit data consent and a gated wizard without inherited bot data or automatic external requests',async()=>{
+ const b=await browser('#connections',{setup:{available:true,revision:0,dataDirectory:'Synthetic private data',fresh:true,botId:null,privacy:{confirmed:false,text:'Synthetic privacy terms'},projects:[],actions:[]},business:{available:true,configured:false,running:false}});
+ assert.match(b.html(),/本机数据目录/);assert.match(b.html(),/Synthetic privacy terms/);assert.match(b.html(),/data-action="setup-self-test" disabled/);assert.match(b.html(),/data-action="setup-activate" disabled/);assert.doesNotMatch(b.html(),/data-action="business-prepare"/);assert.deepEqual(b.calls.filter(c=>c.route).map(c=>c.route),['/api/bootstrap','/api/state']);await b.click('setup-consent');assert.match(b.node('#dialog-fields').innerHTML,/id="setup-accepted" type="checkbox" >/);assert.doesNotMatch(b.node('#dialog-fields').innerHTML,/checked/);
+});
+test('unknown setup operations stay visible and disable a new self-test or pairing request',async()=>{
+ const b=await browser('#connections',{setup:{available:true,revision:9,dataDirectory:'synthetic',fresh:false,botId:'synthetic',privacy:{confirmed:true,text:'scope'},projects:[{name:'Project',path:'synthetic',tools:['read'],mode:'read-only'}],actions:[{id:'prior-test',kind:'self-test',state:'unknown'}]},business:{available:true,configured:true,running:false,paired:false}});assert.match(b.html(),/prior-test/);assert.match(b.html(),/结果待核对/);assert.match(b.html(),/data-action="setup-self-test" disabled/);assert.match(b.html(),/data-action="setup-pair" disabled/);assert.match(b.html(),/data-action="setup-activate" disabled/);
+});

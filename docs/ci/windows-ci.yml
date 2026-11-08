@@ -1,0 +1,56 @@
+name: Verify and package
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Allocate isolated verification directories
+        run: |
+          $taskCiRoot = Join-Path (Split-Path -Parent $env:GITHUB_WORKSPACE) ('qq-agent-ci-' + [guid]::NewGuid().ToString('N'))
+          New-Item -ItemType Directory -Path $taskCiRoot | Out-Null
+          "QQ_CI_ROOT=$taskCiRoot" >> $env:GITHUB_ENV
+          "QQ_TEST_ROOT=$(Join-Path $taskCiRoot 'tests')" >> $env:GITHUB_ENV
+      - run: npm ci --ignore-scripts
+      - run: npm run check
+      - run: npm run check:config
+      - run: npm test
+      - name: Build and audit both archives
+        run: |
+          $taskSource = Join-Path $env:QQ_CI_ROOT 'source'
+          $taskProgram = Join-Path $env:QQ_CI_ROOT 'program'
+          $taskArchives = Join-Path $env:QQ_CI_ROOT 'archives'
+          node scripts/build-source.mjs prepare $taskSource
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          node scripts/build-release.mjs prepare $taskProgram
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          Push-Location $taskProgram
+          try { npm ci --omit=dev --ignore-scripts; if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE } }
+          finally { Pop-Location }
+          node scripts/build-release.mjs seal $taskProgram
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          node scripts/build-archives.mjs $taskSource $taskProgram $taskArchives
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - uses: actions/upload-artifact@v4
+        with:
+          name: qq-agent-gateway-archives
+          path: ${{ env.QQ_CI_ROOT }}/archives/*
+          if-no-files-found: error

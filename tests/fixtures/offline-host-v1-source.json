@@ -1,0 +1,6 @@
+{
+  "journal": "02922077182c9c905289fd92ea9f98a72441fb9a096333f243969b9f303b0900",
+  "change": "Only relative import specifiers relocated; actual prior implementation retained",
+  "version": 1,
+  "host": "265b6f0d4dfa012b1a584feb8c3281a1bbefa235e5236bff01d5f874d8d8efbe"
+}

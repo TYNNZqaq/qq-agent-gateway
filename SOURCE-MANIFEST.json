@@ -1,0 +1,1269 @@
+{
+  "schemaVersion": 1,
+  "kind": "qq-agent-open-source-release",
+  "version": "1.1.0-g1.6",
+  "containsUserData": false,
+  "containsDependencies": false,
+  "files": [
+    {
+      "file": ".gitattributes",
+      "bytes": 145,
+      "sha256": "e42987401d11adee4644c21002da3b0aa09ffabf874d16330d507e5eedc4f1e1"
+    },
+    {
+      "file": ".gitignore",
+      "bytes": 334,
+      "sha256": "6133a963338b12bc5903e6800a88fcc60ed6b649930c8a44ce9786e87cd52d7b"
+    },
+    {
+      "file": "AGENTS.md",
+      "bytes": 3368,
+      "sha256": "1b1052322c88d03114a1472aad9b289bf6f6a33a061fe8c7e7ee45cc16b7199f"
+    },
+    {
+      "file": "LICENSE",
+      "bytes": 1065,
+      "sha256": "6f155704fff07bf896f25171de7512d003fe349e183ea92c69b509b3f6360a37"
+    },
+    {
+      "file": "README.md",
+      "bytes": 6046,
+      "sha256": "dd396a6b4c05f327d350f431ee78889ae7f3612d56ee6cb5dff4225874db0e19"
+    },
+    {
+      "file": "THIRD_PARTY_NOTICES.md",
+      "bytes": 4081,
+      "sha256": "a82ab991342574fb40a6c38c8b338c43ccca2ab3419f2a5be0ff569748ed20e3"
+    },
+    {
+      "file": "docs/AGENT-TEAM.md",
+      "bytes": 2462,
+      "sha256": "116779adf4d13f885f3577ab5c0f181e84b8ad63bf1c01b11902962ec74ce191"
+    },
+    {
+      "file": "docs/USER-GUIDE.md",
+      "bytes": 16138,
+      "sha256": "98c8bb4c64529f630b02c31d2faf7e6f0e099570bed9728b32c4fe9e9fd44cfb"
+    },
+    {
+      "file": "docs/ci/windows-ci.yml",
+      "bytes": 2027,
+      "sha256": "f1e84eb9622317b2bea2241ec2d8a26be54128fb8717517e0bf34e11e72acbc7"
+    },
+    {
+      "file": "docs/g1/config.synthetic.json",
+      "bytes": 997,
+      "sha256": "334d8212b6252e58213f6b50b75134f6c0a8e57015d26bbfa4466a475e41032c"
+    },
+    {
+      "file": "licenses/codex-LICENSE.txt",
+      "bytes": 10926,
+      "sha256": "d17f227e4df5da1600391338865ce0f3055211760a36688f816941d58232d8dc"
+    },
+    {
+      "file": "licenses/codex-NOTICE.txt",
+      "bytes": 242,
+      "sha256": "9d71575ecfd9a843fc1677b0efb08053c6ba9fd686a0de1a6f5382fd3c220915"
+    },
+    {
+      "file": "package-lock.json",
+      "bytes": 1680,
+      "sha256": "511dbf8efe11e9215b23c2a24581052b3352b607a0ed5a0965c0c88767589b39"
+    },
+    {
+      "file": "package.json",
+      "bytes": 992,
+      "sha256": "6f43de70b2dbf0155afdb4956521a72303c814e4c4af31dd66d4b3e9fac09a78"
+    },
+    {
+      "file": "packages/adapters/codex/offline-adapter.mjs",
+      "bytes": 21529,
+      "sha256": "e2303750dc1428b486958b1e99d994e9cde26bbc2505e4b1dc0df8e8128421ae"
+    },
+    {
+      "file": "packages/adapters/codex/protocol.mjs",
+      "bytes": 5449,
+      "sha256": "254eefdbafc1803715431af19855a3278a121737d6952ab65ddc1c2173d7560f"
+    },
+    {
+      "file": "packages/adapters/codex/work-lifecycle.mjs",
+      "bytes": 6872,
+      "sha256": "e33c3e92c2e5a2b496a52c3e22d9e1d583f468edbd01ae9a1ee54c6d003b48df"
+    },
+    {
+      "file": "packages/application/app-server-rpc.mjs",
+      "bytes": 12846,
+      "sha256": "44dbc45f09455433cf41bd7f0eb4638c37de290bc069c9b9d7d75a354db0ac9c"
+    },
+    {
+      "file": "packages/application/app-server-work.mjs",
+      "bytes": 33550,
+      "sha256": "f5779c027fc968705b48b34b7c2838200719d2c015ec15ed13ed291428f29888"
+    },
+    {
+      "file": "packages/application/approval-clock.mjs",
+      "bytes": 4500,
+      "sha256": "e8403bd18a8cf04db15e98386cc2c87fe31637db695ec4bd1b9684cf39774873"
+    },
+    {
+      "file": "packages/application/approval-control.mjs",
+      "bytes": 11653,
+      "sha256": "1b35ff44f10bb5dc0cf21537c400525af7e85e9583ed2e778d842e592f88a2fb"
+    },
+    {
+      "file": "packages/application/approval-conversation.mjs",
+      "bytes": 8315,
+      "sha256": "32d8149de555b364a6be7a7a5fc6de914404acee40a59f01bef5eefdedd15e64"
+    },
+    {
+      "file": "packages/application/approvals.mjs",
+      "bytes": 520,
+      "sha256": "76bf4df804b1588398f84a991702897103075996fd8dd059fcd17c22eff0e5d6"
+    },
+    {
+      "file": "packages/application/boundaries.mjs",
+      "bytes": 3844,
+      "sha256": "af8d07bfe0bc3414728f02c246dfcd95fb9687aba3ff08b6820212e2e31b4800"
+    },
+    {
+      "file": "packages/application/bridge-requests.mjs",
+      "bytes": 1718,
+      "sha256": "81b284dd222ad925836691dbd03e4c01e323433c3134fac2032a0ec48c6fdee9"
+    },
+    {
+      "file": "packages/application/business-runtime.mjs",
+      "bytes": 15432,
+      "sha256": "b55c2ec212fedbec566ca9854ba9ff017ce6b1f2ee1a096a50293c046ec428ff"
+    },
+    {
+      "file": "packages/application/chat-batcher.mjs",
+      "bytes": 8634,
+      "sha256": "ba141d7d100de54248406a977a1cc0d16746f2d780be53ed926a71d574b5581f"
+    },
+    {
+      "file": "packages/application/chat-execution.mjs",
+      "bytes": 5719,
+      "sha256": "1fd880e1ce63fe20c8a041247c4f3605431a65dc70a9f9e63efaffccecdd9326"
+    },
+    {
+      "file": "packages/application/chat-migration.mjs",
+      "bytes": 7053,
+      "sha256": "dba453d591512453c849c20571e05e95adbbb6ca6d4c51daec609969988cb998"
+    },
+    {
+      "file": "packages/application/chat-options.mjs",
+      "bytes": 2807,
+      "sha256": "b46004baed2adb8b6c3e992dce354936e54118f59bd2a913ca3c6ccd069e2792"
+    },
+    {
+      "file": "packages/application/chat-runner.mjs",
+      "bytes": 8154,
+      "sha256": "56013014ac4123d318f1424d8062744616cfa3d4ebab07b19274b603c46c4c84"
+    },
+    {
+      "file": "packages/application/chat.mjs",
+      "bytes": 8505,
+      "sha256": "8645c3291bc76faefa9df1a89be23fc8a37c82934e51c314b68ceed1dba5ee49"
+    },
+    {
+      "file": "packages/application/chunked-upload.mjs",
+      "bytes": 2446,
+      "sha256": "a03144dc550450f22110dbdef0288832abfbfe9fcf21f27f21379ec37bb5c51a"
+    },
+    {
+      "file": "packages/application/cli.mjs",
+      "bytes": 4443,
+      "sha256": "6c7eda44c7893f46b83c004c8d27d6c100a11b359d837c24c5600415b9e0f1f8"
+    },
+    {
+      "file": "packages/application/client-question-context.mjs",
+      "bytes": 4298,
+      "sha256": "d296a12fe57f51102a8bd3f038474672b6519396bf6e42c98f2e59d1c38ca577"
+    },
+    {
+      "file": "packages/application/client-question-gateway.mjs",
+      "bytes": 10059,
+      "sha256": "58de14657e516ac74d4ffe5c142ef4fa6088ca2a60ccdccc71c2c0ad5a4059bb"
+    },
+    {
+      "file": "packages/application/client-question-mcp.mjs",
+      "bytes": 8974,
+      "sha256": "b16b60c46f5ad6b0fa00b829b43f94213161a2aa32e827fa3f6eddc62f83fe2d"
+    },
+    {
+      "file": "packages/application/completion.mjs",
+      "bytes": 1985,
+      "sha256": "2af264d07a1234a1d1d2f506173bc2929a2a61c787306ee2204f5f5ff872e150"
+    },
+    {
+      "file": "packages/application/config.mjs",
+      "bytes": 6063,
+      "sha256": "51df5045bbaad40365272f0007087e7b6ab26ffbbe010db88a41870d633ee5d2"
+    },
+    {
+      "file": "packages/application/context-builder.mjs",
+      "bytes": 8966,
+      "sha256": "a0b516df5a8f0cb2ad311ba02c4f3b538d092df41e34d00089c60e07ddaf688c"
+    },
+    {
+      "file": "packages/application/delivery.mjs",
+      "bytes": 12050,
+      "sha256": "6b5e0085651f63bfcbf081294cf105fc08ac53e5c25fea7b1eb64624b47df01f"
+    },
+    {
+      "file": "packages/application/desktop-notifications.mjs",
+      "bytes": 8510,
+      "sha256": "743e8eac84ce65ddc176fb4250cbe058c1591684b088d62608955b2383ba8246"
+    },
+    {
+      "file": "packages/application/desktop-notify.mjs",
+      "bytes": 3898,
+      "sha256": "69b2858bcfeef7502ae2d1f0f34ce86d5fbb5e6cbed5dbf504570342d54c1ad2"
+    },
+    {
+      "file": "packages/application/desktop-permission-control.mjs",
+      "bytes": 12377,
+      "sha256": "42a9b612a2945bcdccb268dbea3822b5cfd43c9208c08823d314fbc5edb4b8cf"
+    },
+    {
+      "file": "packages/application/desktop-permission-hook.mjs",
+      "bytes": 6195,
+      "sha256": "8b70fdcd650ad7bcb2824726eff28c3416ab1e25a5a23ddd8e45d0da72ab0b1d"
+    },
+    {
+      "file": "packages/application/desktop-questions.mjs",
+      "bytes": 16085,
+      "sha256": "4f324b093276d912e84f5e445293643ea756ea28a062f5d6298c352f40e950d5"
+    },
+    {
+      "file": "packages/application/executable.mjs",
+      "bytes": 1110,
+      "sha256": "b1b861acd0a3ff98b0240ca96f93b49ccdab24a386c0ebe9fee7e420b2a34b65"
+    },
+    {
+      "file": "packages/application/file-receive.mjs",
+      "bytes": 22188,
+      "sha256": "af7c7a5deb030d729d753235072a425123e86a193593691e75a0eab4933ef8c6"
+    },
+    {
+      "file": "packages/application/files.mjs",
+      "bytes": 23934,
+      "sha256": "d227a78167cb135ff567e9ac0c8c3cff383c71e9a80c221d36e3e15bdf7bd023"
+    },
+    {
+      "file": "packages/application/first-run-features.mjs",
+      "bytes": 5063,
+      "sha256": "9f3bf9d2c98004604a81bff5e071b7b0c72f18e1e3f0a9e503b57a6552b5373e"
+    },
+    {
+      "file": "packages/application/fresh-bootstrap.mjs",
+      "bytes": 7924,
+      "sha256": "96e492327d4d0ff728daf9c3ea4fc1cf6449c05384a27474a90d9f03f717f5e3"
+    },
+    {
+      "file": "packages/application/instruction-intake.mjs",
+      "bytes": 2096,
+      "sha256": "3f6d135d0fa76d2bfb7f43374fe5e635409f8c9f71820417455f3ba443a64f46"
+    },
+    {
+      "file": "packages/application/memory-policy.mjs",
+      "bytes": 8223,
+      "sha256": "8df6deb51251379ec0f1411d099309ea13a26d49b13b865a2032c9dc70e23a6f"
+    },
+    {
+      "file": "packages/application/memory-retrieval.mjs",
+      "bytes": 3794,
+      "sha256": "ce85352a7528b879594f10fe158834b5003caffe7337fcdf3ecd3c23d974d8c7"
+    },
+    {
+      "file": "packages/application/memory-store.mjs",
+      "bytes": 22428,
+      "sha256": "5da2fe248dc66d4d09758acf7ec245a182436ad5f5c4d92fd46ff1587c2b8e81"
+    },
+    {
+      "file": "packages/application/menus.mjs",
+      "bytes": 5186,
+      "sha256": "bd84baaa637fbfabc14c3fda6534494271c324d933f3a07392a4eeaf3e0f3a92"
+    },
+    {
+      "file": "packages/application/models.mjs",
+      "bytes": 4844,
+      "sha256": "3df87856548e32117ea33cb75a0cc7ef8f662af6a85fd8028bedbca1b03e141b"
+    },
+    {
+      "file": "packages/application/native-desktop-files.mjs",
+      "bytes": 7585,
+      "sha256": "809acb216c04e26eccb200f9f1b54c972bf844d86c0e39752e393fd81b4bc234"
+    },
+    {
+      "file": "packages/application/native-desktop-scope.mjs",
+      "bytes": 1218,
+      "sha256": "06b17351c884f2f529d86d7be139f6d7856b984606abe5ec02a2c33d1850e712"
+    },
+    {
+      "file": "packages/application/native-global-notifications.mjs",
+      "bytes": 8926,
+      "sha256": "65e309efeb4a734ef2b24df9edc02a674839dfcfa85d74cfbb07cec08de8c624"
+    },
+    {
+      "file": "packages/application/native-owner-bridge.mjs",
+      "bytes": 13227,
+      "sha256": "693934592e92b32a60eccb449adb2eb95860136a71071639598ce1c507f1dfe0"
+    },
+    {
+      "file": "packages/application/native-owner-input.mjs",
+      "bytes": 6462,
+      "sha256": "215e53426a372e5948351b48727c4b8d80454304a7a8f125afd4bf4d14b513d5"
+    },
+    {
+      "file": "packages/application/native-owner-state.mjs",
+      "bytes": 4712,
+      "sha256": "fd8cf6273a591c13229c50528b8528cc17c82a5f975f9d7d3b1a1bd98d49ae50"
+    },
+    {
+      "file": "packages/application/numbering.mjs",
+      "bytes": 8028,
+      "sha256": "a16835fe86e8bff1ffede4eeb442f84d689972c332c32ddaaf78df212061a725"
+    },
+    {
+      "file": "packages/application/pairing-runtime.mjs",
+      "bytes": 4445,
+      "sha256": "0bd55a599d5c6834041795cbcd926de3a2efae2eb4b28b0ce53e06eb87cb5467"
+    },
+    {
+      "file": "packages/application/portable-view.mjs",
+      "bytes": 753,
+      "sha256": "39a7aa9d0951b6945e81c831c5ceb2d46d03ae3d3d1de1de94371c38c815f7f8"
+    },
+    {
+      "file": "packages/application/project-file-proposal.mjs",
+      "bytes": 3577,
+      "sha256": "59cf8cc3c97a38fd8f35c2d7603da1b2aa9b39e7d0b56fa0f021c590999e5458"
+    },
+    {
+      "file": "packages/application/project-read.mjs",
+      "bytes": 4412,
+      "sha256": "78f569ab605d977fe51ebc5379e37d57b69f4917c560f6db7884aa168ba62f8b"
+    },
+    {
+      "file": "packages/application/project-tasks.mjs",
+      "bytes": 16831,
+      "sha256": "2c32700101df3fa67e02969a02129385d46dabf16fbdc0e22e634ae3fa85e112"
+    },
+    {
+      "file": "packages/application/projects.mjs",
+      "bytes": 6277,
+      "sha256": "c1e392f2c1b24b6d3b77ee3171b8dfc5b2dc0dcd2e687ffc0527e0bb35305811"
+    },
+    {
+      "file": "packages/application/qq.mjs",
+      "bytes": 12823,
+      "sha256": "3d61b43f5ffbdfc993211e0190e7ea6699389febb91567a650a16e8b07004125"
+    },
+    {
+      "file": "packages/application/questions.mjs",
+      "bytes": 380,
+      "sha256": "285cfbdacde93cd580672fa8fe6246ec6c6617448416481beb9faf5a5e2343d3"
+    },
+    {
+      "file": "packages/application/queue-control.mjs",
+      "bytes": 778,
+      "sha256": "6db24c3077d6b15a6b2d13b2bdf346d71da02979e141a71980ab0c3bc62a7ec8"
+    },
+    {
+      "file": "packages/application/router.mjs",
+      "bytes": 33325,
+      "sha256": "e7cd6827a77e29099133d2b5bf54b35214168672c0e1e49ad1d2dbd097600703"
+    },
+    {
+      "file": "packages/application/runner.mjs",
+      "bytes": 424,
+      "sha256": "4e2e69a48b2d86df0f0aa23a89c748c7fa3a076b82a401f2d1cc37fa16483551"
+    },
+    {
+      "file": "packages/application/self-test.mjs",
+      "bytes": 13439,
+      "sha256": "c4554edc53738d861f3eccd56a74d865f5e72a4a62575c16b7e42b2831a3e583"
+    },
+    {
+      "file": "packages/application/service.mjs",
+      "bytes": 4846,
+      "sha256": "10f319c80ed4c68146a5aec0c2b97f88657ac31af9d79220b518be9dc1783b0a"
+    },
+    {
+      "file": "packages/application/store.mjs",
+      "bytes": 32577,
+      "sha256": "69245d836b7180c7dd0d16aaa27f91d507a36119cf2e2de27a99852fa7ebdbe6"
+    },
+    {
+      "file": "packages/application/task-reset.mjs",
+      "bytes": 3477,
+      "sha256": "c65353302ff01059ee8a469e5c2663a366abc11e8674c637fafbe746c7041d8a"
+    },
+    {
+      "file": "packages/core/adapter-registry.mjs",
+      "bytes": 2151,
+      "sha256": "9d8f12d924787c40980c4c05419959c73771fa4bf14e66d1da52f60842b81a8d"
+    },
+    {
+      "file": "packages/core/cancel-contracts.mjs",
+      "bytes": 1454,
+      "sha256": "d8c30621c3da9ed4abf2e48edfe014e25c67cbee894071c0f675fe3fa95f8474"
+    },
+    {
+      "file": "packages/core/configuration.mjs",
+      "bytes": 5781,
+      "sha256": "dd2d19de32d3b3c67e134a865ee241a5723b80206b3fea5a61b8e06f09d18500"
+    },
+    {
+      "file": "packages/core/contracts.mjs",
+      "bytes": 3602,
+      "sha256": "2941181086f3723f51ea8fd2dd5a2f5f5c0bdb47fd3a83c2a2532cb2457cbf5d"
+    },
+    {
+      "file": "packages/core/event-contracts.mjs",
+      "bytes": 2310,
+      "sha256": "c90e58f64c259853e82603d736593a3bd1e8ed40cc1d58a310a815947a98999f"
+    },
+    {
+      "file": "packages/core/input-contracts.mjs",
+      "bytes": 1954,
+      "sha256": "ffef087bae0326866a6321fc2f8816d40587c740939245e7419b87ca03647299"
+    },
+    {
+      "file": "packages/core/management.mjs",
+      "bytes": 1266,
+      "sha256": "77af6fc3c70911e46a962f466eca03834bdd47cae9861bf429b358b71423fd37"
+    },
+    {
+      "file": "packages/core/session-scheduler.mjs",
+      "bytes": 2194,
+      "sha256": "296bd102047da8edbbf3cea9ff278dc5f0b1ebc5ebcd96c88bb8b5a615eabb72"
+    },
+    {
+      "file": "packages/core/task-reference.mjs",
+      "bytes": 769,
+      "sha256": "da322d78e3c73fe66bef5f7619ca5475f7b085ab6c3ed11b47e4c9424b2d4c9b"
+    },
+    {
+      "file": "packages/gateway-qq/bot-transport-lifecycle.mjs",
+      "bytes": 9121,
+      "sha256": "ee0dad35e55c24603ab736d65f7788540dfafcd76a721b196ed3bd1ae42fd66e"
+    },
+    {
+      "file": "packages/gateway-qq/local-gateway.mjs",
+      "bytes": 4094,
+      "sha256": "f3a0722b4d0064d524c1493133c865b345294899e91c51c251a87ab9097f9072"
+    },
+    {
+      "file": "packages/host-control/application-cache.mjs",
+      "bytes": 1646,
+      "sha256": "ef96e77d21f9a0d37a14005f15b32248fa02f821fb988bc99d95336cd9303559"
+    },
+    {
+      "file": "packages/host-control/application-paths.mjs",
+      "bytes": 7567,
+      "sha256": "8b891d42635a65dac5233e4907d08901cd54c2835fcdcf351d5350bb766bc73b"
+    },
+    {
+      "file": "packages/host-control/business-controller.mjs",
+      "bytes": 12870,
+      "sha256": "383c32b4d01a0f27696b9bcfba6c91e6417e9423a0707936dd79e05774037a5f"
+    },
+    {
+      "file": "packages/host-control/business-migration.mjs",
+      "bytes": 9865,
+      "sha256": "1cffbd8aba8df04b901264dc6df7fca39871f7b0acbcaec8b1ca70ed3415b39c"
+    },
+    {
+      "file": "packages/host-control/cli.mjs",
+      "bytes": 3423,
+      "sha256": "c4534ed9012a889fc7f9ebfb7cd2cf1887abd70d1f014c03cc5744ca4309cd6a"
+    },
+    {
+      "file": "packages/host-control/codex-account-controller.mjs",
+      "bytes": 17782,
+      "sha256": "c399cc5c159445ae9dcccc4cd501827b90a874773d9e086515d5a1a982844c3c"
+    },
+    {
+      "file": "packages/host-control/codex-account-policy.mjs",
+      "bytes": 5541,
+      "sha256": "19bc1e8e256b27f7821016ecc0692135b698719824e994a4b44073a21ea89f82"
+    },
+    {
+      "file": "packages/host-control/codex-account-process.mjs",
+      "bytes": 9149,
+      "sha256": "38203d8cd6d25b5da3d036a494f4ce9142c2136233efff3fcdb02b180f7a0d10"
+    },
+    {
+      "file": "packages/host-control/codex-account-work-binding.mjs",
+      "bytes": 6619,
+      "sha256": "26e91cab48ab3b902df1fb467bbcb20e054e0ab342a310c2d2b77d592a0915f9"
+    },
+    {
+      "file": "packages/host-control/codex-authenticated-runtime.mjs",
+      "bytes": 5331,
+      "sha256": "4e262075f855ade7095889f5e6a15a429f582a18becc4063845f88d04a52fa58"
+    },
+    {
+      "file": "packages/host-control/codex-live-status.mjs",
+      "bytes": 6377,
+      "sha256": "98649afb82f44c512bfd8796cd91fb0ef5708d93e309898524ac75cd64c8c658"
+    },
+    {
+      "file": "packages/host-control/codex-network-policy.mjs",
+      "bytes": 879,
+      "sha256": "3e95550924e8c41034f0d7b09e232df56f805bfefb3e3b028e4b17a0c1a06252"
+    },
+    {
+      "file": "packages/host-control/codex-owned-session.mjs",
+      "bytes": 17492,
+      "sha256": "69994315cb8aff985ebe54097b88cd4eea452994e13f971980579b27de44d363"
+    },
+    {
+      "file": "packages/host-control/codex-reviewed-wire.mjs",
+      "bytes": 991,
+      "sha256": "6b1a8bd4f0c584f037c09e96dc2f6ce8650e8a5d24337acc0aada874a1ebd5bc"
+    },
+    {
+      "file": "packages/host-control/codex-session-policy.mjs",
+      "bytes": 6685,
+      "sha256": "1823711cbb2948eeaee550612ba3971c1f02b5d25602cb377e4ce4ea6b3ed838"
+    },
+    {
+      "file": "packages/host-control/codex-version-policy.mjs",
+      "bytes": 2055,
+      "sha256": "0455bbb3e0b1e0b4d786eeb95d78aea4cc9177737606b299daeec4fde9e35788"
+    },
+    {
+      "file": "packages/host-control/codex-work-policy.mjs",
+      "bytes": 4699,
+      "sha256": "d9d3b88ca7fec1fe81d3dc9c16e745da745b7df80084e668d6f44058a322af1b"
+    },
+    {
+      "file": "packages/host-control/codex-work-process.mjs",
+      "bytes": 6999,
+      "sha256": "8fdba407cce5b82867c977cc6c1da11e838ef92454bf5ff2553c47902d3ed892"
+    },
+    {
+      "file": "packages/host-control/codex-work-profile.mjs",
+      "bytes": 19735,
+      "sha256": "e1048845a9f43a041990a33462b5fcf48121c4e13caa5660c11294aa8bf450ed"
+    },
+    {
+      "file": "packages/host-control/desktop-autoconnect.mjs",
+      "bytes": 8129,
+      "sha256": "1163a2927fbeb82afe61072fc1441977eea5fe39398aa6da4d2e0fda907dfd22"
+    },
+    {
+      "file": "packages/host-control/input-coordinator.mjs",
+      "bytes": 2706,
+      "sha256": "53f12d9fa2ed4d5209e65af04a15ce4099f5f79f85b2b3117e9182007e809add"
+    },
+    {
+      "file": "packages/host-control/local-diagnostics.mjs",
+      "bytes": 1428,
+      "sha256": "4f3329540bcdedc215046d56b4e8bc409ca823e1baf55145aed65cbb2bff9194"
+    },
+    {
+      "file": "packages/host-control/local-server.mjs",
+      "bytes": 13713,
+      "sha256": "b992cd9fb2166db27b8d1671955dc2fbe7cf0f857dc529d0f3a7026e26ca7a60"
+    },
+    {
+      "file": "packages/host-control/native-archive-slice.mjs",
+      "bytes": 2597,
+      "sha256": "168303c6c312a11f99deee0882e35e11994530fd58a8ed73e329a23ef0a0f458"
+    },
+    {
+      "file": "packages/host-control/native-desktop-catalog.mjs",
+      "bytes": 5221,
+      "sha256": "62671dc59b10a722f3ed1e2716286abab26376510c02754a0f120778542ed1f8"
+    },
+    {
+      "file": "packages/host-control/native-desktop-location.mjs",
+      "bytes": 1633,
+      "sha256": "ebef06d1b61d9b8325e9eeaaa1ab9eb2c30e60475503d9ea8cd91fab978fda62"
+    },
+    {
+      "file": "packages/host-control/native-desktop-reader.mjs",
+      "bytes": 11772,
+      "sha256": "57936473e9b15cee493ecb4b5d49fd91d2efe0f259d0128da717ab72aa09c05c"
+    },
+    {
+      "file": "packages/host-control/native-owner-connection.mjs",
+      "bytes": 10891,
+      "sha256": "6ae7e3d01effffd37d62133e99e91203c3b141542c59e25104bb67ea92cd94b6"
+    },
+    {
+      "file": "packages/host-control/native-permission-source.mjs",
+      "bytes": 3613,
+      "sha256": "abc9c6f844a69de8c9ef38d0033da6d44199edb947ea01e78fa4cef6156dd92d"
+    },
+    {
+      "file": "packages/host-control/native-session-paths.mjs",
+      "bytes": 2900,
+      "sha256": "ecd6472d969ef1740baf8acfa48d351f9bd38c8470189c77e32d012572600290"
+    },
+    {
+      "file": "packages/host-control/offline-cancellation.mjs",
+      "bytes": 9605,
+      "sha256": "e7424be8bfbe8a804f82b49e0698298ba7ae9c6a4b7eb3ec7ec530b51223669f"
+    },
+    {
+      "file": "packages/host-control/offline-dispatch-host.mjs",
+      "bytes": 42258,
+      "sha256": "6a97f506bfb620012e56161a9f184ebc55772fd37a3e77f11568f71d3ab17e8b"
+    },
+    {
+      "file": "packages/host-control/offline-event-receiver.mjs",
+      "bytes": 11050,
+      "sha256": "1795914ac64f476c1e849fcbeb69238d26c7d0a32e3ebffe658be8437cf95374"
+    },
+    {
+      "file": "packages/host-control/offline-ingress-retention.mjs",
+      "bytes": 11306,
+      "sha256": "71b650cc388f01f916e3ca7b7bc2bfb7870e10c799d2a35994ed6aab888191c7"
+    },
+    {
+      "file": "packages/host-control/qq-connection-controller.mjs",
+      "bytes": 12827,
+      "sha256": "8f2b0e7e4676aab1b6515d9d640e0da2b796d80c9930c9bc84b867332fdc8b0f"
+    },
+    {
+      "file": "packages/host-control/qq-credential-process.mjs",
+      "bytes": 3589,
+      "sha256": "4b04f4b918aff7e458f177c241676d16dc756ec2fb42a8c05831e851acd87cd2"
+    },
+    {
+      "file": "packages/host-control/qq-platform-client.mjs",
+      "bytes": 3589,
+      "sha256": "f0f98c1322ed76dfaabd3bcc83ebed00f968a543100d4d0fed72d3ef9b37721f"
+    },
+    {
+      "file": "packages/host-control/setup-controller.mjs",
+      "bytes": 16002,
+      "sha256": "cdd2d7639029f3d5fc971a43975191b45962242d8c55130313c6bfc106bacc4f"
+    },
+    {
+      "file": "packages/host-control/setup-policy.mjs",
+      "bytes": 4684,
+      "sha256": "db266f2055eb1d6bdc8a6fd76eeaa7ad4c33035062c47e4d9caaa101806ef7e4"
+    },
+    {
+      "file": "packages/host-control/tool-catalog.mjs",
+      "bytes": 1525,
+      "sha256": "c8d27215202c2e5fdd08ffce3c8767990dca42520c033016c6945359e13c91ef"
+    },
+    {
+      "file": "packages/host-control/user-data-transfer.mjs",
+      "bytes": 16246,
+      "sha256": "922a95f89ca3eedb4060c11753b1ed75b80c442a1dc7c964d4b8850030011fc5"
+    },
+    {
+      "file": "packages/host-control/windows-known-folders.mjs",
+      "bytes": 1883,
+      "sha256": "4e030cee1df61775f628874f397ac2bf2c7846704a468dd89c4a76afa5c3e53c"
+    },
+    {
+      "file": "packages/management-ui/app.js",
+      "bytes": 73154,
+      "sha256": "1e7ab5c01d00176c5235f9bbf7cbed5af76f54b856c3c076a75ee2a69779528b"
+    },
+    {
+      "file": "packages/management-ui/favicon.svg",
+      "bytes": 273,
+      "sha256": "671a1f1c836d48036c5d4dff80d7edf9e1b3fe9f7dc444f88b31215135bbe785"
+    },
+    {
+      "file": "packages/management-ui/index.html",
+      "bytes": 3696,
+      "sha256": "210dd690fe76585a28cef88868e05f12b0e3ba1061dec58d4a087e956fd784e8"
+    },
+    {
+      "file": "packages/management-ui/styles.css",
+      "bytes": 23375,
+      "sha256": "ebf2cd9b70c3b047a1bbcbf747bc15073e66e164a6f1caa5d177f20e68440737"
+    },
+    {
+      "file": "packages/storage/account-control-store.mjs",
+      "bytes": 1871,
+      "sha256": "b76c7c7114b6bbb4ce012d1af2d0c61373b8ca6dae9087bb5f9bdfdb24d6de9f"
+    },
+    {
+      "file": "packages/storage/management-store.mjs",
+      "bytes": 7794,
+      "sha256": "60f6408a728f169e1d6d4c0def45f0898e354a7c7c3e3efec61006173a8cbc03"
+    },
+    {
+      "file": "packages/storage/qq-control-store.mjs",
+      "bytes": 1691,
+      "sha256": "b0e8853fd6b9053054c43b4597c585486efd733135cfeb67eb06ef206a2e1480"
+    },
+    {
+      "file": "packages/storage/setup-store.mjs",
+      "bytes": 2000,
+      "sha256": "bd0db6b950fcfa2cb5919ada921fd735faa54fe52681b08fd20ab56efaa5f78c"
+    },
+    {
+      "file": "packages/storage/sqlite-journal.mjs",
+      "bytes": 4688,
+      "sha256": "47236b691a04a3efed4b5b34e53a48bc74a828f716cd5043e5a105ad901912b0"
+    },
+    {
+      "file": "packages/storage/work-store.mjs",
+      "bytes": 53690,
+      "sha256": "f36065132897aa8c8bef58a964e1e2a982eeaa21c1d3154018039b7b520e82b1"
+    },
+    {
+      "file": "scripts/Connect-QQOnDesktopStart.ps1",
+      "bytes": 1561,
+      "sha256": "47415dc88a9e85803ceff1730635bbd927e88e9fc6251a71d5c7eb7e62673313"
+    },
+    {
+      "file": "scripts/Desktop-AutoConnect.psm1",
+      "bytes": 5176,
+      "sha256": "0487935756e7c8ac019d71f1c84426460bb7154aab0689e7ca5c4859a3eef426"
+    },
+    {
+      "file": "scripts/Desktop-Notify.ps1",
+      "bytes": 626,
+      "sha256": "653e42b0709a1acd3078af21f849bfc7bd641c99ac74b50110b6d20073cd37de"
+    },
+    {
+      "file": "scripts/Desktop-StartEvents.cs",
+      "bytes": 5927,
+      "sha256": "c006a56463e3c5b1b2b247eea27c433ba5df7929ec14f0678996921917aea617"
+    },
+    {
+      "file": "scripts/Enable-CodexAutoConnect.ps1",
+      "bytes": 2875,
+      "sha256": "d3b24e1f368f13040e5e2d38e6ef13150def3926f4c27f8e76c8bedc61d5f936"
+    },
+    {
+      "file": "scripts/Enable-Native-DesktopApproval.ps1",
+      "bytes": 7483,
+      "sha256": "3f7cf205d2a8a3963b5b457078912d7194624409ca044c2fa129f68986d21746"
+    },
+    {
+      "file": "scripts/Initialize-Cache.ps1",
+      "bytes": 2704,
+      "sha256": "6defee267b502a998c26bfe7d425c40234ad3cb6af60bd57cd99bb14dfab3b8e"
+    },
+    {
+      "file": "scripts/Install.ps1",
+      "bytes": 1060,
+      "sha256": "171d352b5ee14d6218cdb5e665b8f1782ea21a0d75b97e3ff5187542e36a24c9"
+    },
+    {
+      "file": "scripts/Read-NativeApprovalOwner.mjs",
+      "bytes": 960,
+      "sha256": "ec21a4505a654360eb9cdf994123247f8a6f6f52a3e00481d945db186cfd5951"
+    },
+    {
+      "file": "scripts/Resolve-DataDirectory.ps1",
+      "bytes": 654,
+      "sha256": "a8363f6ffb51812bb9cc7ca51aaa303cd10d93fafcb50261167e9152ee0ea5fa"
+    },
+    {
+      "file": "scripts/Start-Console.ps1",
+      "bytes": 2722,
+      "sha256": "336345c853953efb405f654b0fa2273183cdb8d6c36e66330e24bfb638eda2f3"
+    },
+    {
+      "file": "scripts/Stop-Console.ps1",
+      "bytes": 1075,
+      "sha256": "46e4eb04ae1b7d25571154e39659053dabb4348c956f4a885c76452646ca3881"
+    },
+    {
+      "file": "scripts/Watch-CodexStart.ps1",
+      "bytes": 2781,
+      "sha256": "df8f64da937f2ff846364f9ea07d1a8634e40c148141f1de4b8afd2e9759397e"
+    },
+    {
+      "file": "scripts/build-archives.mjs",
+      "bytes": 5427,
+      "sha256": "bf8ce1d7032cbca2d8b4048944706ef4d8aae77259b2fc88003dca2d2d10848b"
+    },
+    {
+      "file": "scripts/build-release.mjs",
+      "bytes": 4761,
+      "sha256": "b6b0174542fe4e50e1964ff8d86895ba399f2beff981cac9d1d7b463aee26a01"
+    },
+    {
+      "file": "scripts/build-source.mjs",
+      "bytes": 4559,
+      "sha256": "51a692c46264dd73c9c90fc90039578fb966b92d37e6dbc9c1fd260365cc8e9e"
+    },
+    {
+      "file": "scripts/check-boundaries.mjs",
+      "bytes": 10917,
+      "sha256": "dcee1318ee5f4061cee2ff78363e60a1a31b3b51d18c01e969e551fc990d711a"
+    },
+    {
+      "file": "scripts/preview-ui.mjs",
+      "bytes": 550,
+      "sha256": "462758e7ab1832136b56ac032f4995f38abb463629b1621cfabe0d593aa2af37"
+    },
+    {
+      "file": "scripts/release-policy.mjs",
+      "bytes": 7770,
+      "sha256": "806f94ccf6cf750f8aa8b05c99b9a7cfdb9cc974b75c389a5549eec598e2ea0e"
+    },
+    {
+      "file": "scripts/run-tests.mjs",
+      "bytes": 2270,
+      "sha256": "783be3a091fd671cf269d8a8e1a049fb14bcd92f4e98af27b6fdebd95bc8a870"
+    },
+    {
+      "file": "scripts/verify-configuration.mjs",
+      "bytes": 902,
+      "sha256": "3df64ed2cf88008113cef9213579e6f846ceffbcc69cf7962e54a711ce51d4ea"
+    },
+    {
+      "file": "tests/application-cache.test.mjs",
+      "bytes": 3917,
+      "sha256": "4dd140070f50c442ae807982e7ec13320c8d4daaed01de95b1869a990570182b"
+    },
+    {
+      "file": "tests/application-paths.test.mjs",
+      "bytes": 4650,
+      "sha256": "2c1ce00c3dc794462378ec544b8ecb5335090c7920dd2287b63a97cd9276b705"
+    },
+    {
+      "file": "tests/approval-conversation.test.mjs",
+      "bytes": 16611,
+      "sha256": "16bef19e1008074622425af94ae489dfca1f311cdbbd7a7f8654e388a3c5dc14"
+    },
+    {
+      "file": "tests/boundaries.test.mjs",
+      "bytes": 6479,
+      "sha256": "769866e86277b8f16c5b0d0405a6c7520b479b8be5210d36ca61ee13859c0cbd"
+    },
+    {
+      "file": "tests/business-boundaries.test.mjs",
+      "bytes": 3444,
+      "sha256": "e1da46228fbc71aff399a874c27f6b6eb3a2306aaa41f325c6c7888734e9c0ae"
+    },
+    {
+      "file": "tests/business-controller.test.mjs",
+      "bytes": 6454,
+      "sha256": "e084f469d800e2aec21fb4ba9b51841d9c05c33b7c7df9d3776c291747258d13"
+    },
+    {
+      "file": "tests/business-failure.test.mjs",
+      "bytes": 2747,
+      "sha256": "c381ef35ec7b9e65db52847e3095407384587995859d96aa51b201280088b499"
+    },
+    {
+      "file": "tests/business-migration.test.mjs",
+      "bytes": 7589,
+      "sha256": "cb5bba841d7ee5cdaac58cfcb4e6042fe73b4d3d95cde8b9f52286f7f1b0ec44"
+    },
+    {
+      "file": "tests/business-runtime.test.mjs",
+      "bytes": 8175,
+      "sha256": "b59b6305f33b63f32b0351a32a01cd9126b685e392ed92e81f80a12e249e5b7c"
+    },
+    {
+      "file": "tests/chat-execution.test.mjs",
+      "bytes": 3148,
+      "sha256": "e2af510d84003997a168bfcdb9e9b015eb987c68cc73edc9f909203c77f5cefc"
+    },
+    {
+      "file": "tests/client-question-mcp.test.mjs",
+      "bytes": 16743,
+      "sha256": "557a22a447503053f849d646679ed5de16cdb3e45d91c7057d1a55e00b30a479"
+    },
+    {
+      "file": "tests/codex-account.test.mjs",
+      "bytes": 36444,
+      "sha256": "a4f82942b773b5e09956f928dc67ace81b61d68c05ecbdfa8f6ad8032d957f21"
+    },
+    {
+      "file": "tests/codex-adapter.test.mjs",
+      "bytes": 35611,
+      "sha256": "29cb73f0bcac79e0ba83680b815bbf0b9b2deb021e44f573e4346f8cb38f8c6b"
+    },
+    {
+      "file": "tests/codex-authenticated-runtime.test.mjs",
+      "bytes": 5255,
+      "sha256": "0b6152f88ff111ee76e25d9bccaa26cd76fa3afeaee3814701be0fd3de0b44be"
+    },
+    {
+      "file": "tests/codex-live-proof.test.mjs",
+      "bytes": 4189,
+      "sha256": "5f0696db0fd99942992a5aecdb75d051afa55af9ed787aa51f8ecfd1b3e13a33"
+    },
+    {
+      "file": "tests/codex-owned-session.test.mjs",
+      "bytes": 29624,
+      "sha256": "70ade18e9a9897176cacc2edd35b3300b72c6c6d03c118dfd6189db9b920ff38"
+    },
+    {
+      "file": "tests/codex-reviewed-wire.test.mjs",
+      "bytes": 3228,
+      "sha256": "53f3ace778c0e1bdc41a8fb38da3f61682e85ec396d5fb39f4136c01640ba752"
+    },
+    {
+      "file": "tests/codex-work-profile.test.mjs",
+      "bytes": 26512,
+      "sha256": "9179407768cb641734c27910974805e6525944022ab7847ab6d390764787599a"
+    },
+    {
+      "file": "tests/codex-work.test.mjs",
+      "bytes": 26289,
+      "sha256": "e8334ff6dd1f9e4d90155412b745f4d62b601c7a0ae99668b634225bb3547f0a"
+    },
+    {
+      "file": "tests/connections-ui.test.mjs",
+      "bytes": 6530,
+      "sha256": "bcd5b0530f344a1c5c2f41c7d8e083db1e634ff930af9885d95645f6da849b61"
+    },
+    {
+      "file": "tests/core.test.mjs",
+      "bytes": 6755,
+      "sha256": "b14fef825b9b86410c8b4236fbfd910ea45c49b647125d6e764b10ee4b130b7e"
+    },
+    {
+      "file": "tests/desktop-autoconnect-powershell.test.mjs",
+      "bytes": 3156,
+      "sha256": "0c29e3f8e0d455305617e64375ed0db9a5f7f7bdcacf281c67a57c917525278f"
+    },
+    {
+      "file": "tests/desktop-autoconnect.test.mjs",
+      "bytes": 9365,
+      "sha256": "961e9969ae19cab46ff3981cdacd2866840ec02c19e64bd7f3f46194dc1c3757"
+    },
+    {
+      "file": "tests/desktop-notifications.test.mjs",
+      "bytes": 16054,
+      "sha256": "25597e1c058e99dc2a3f7f6fece6598791d17af7bc60e2fed2a0fcc7e9c43ed6"
+    },
+    {
+      "file": "tests/desktop-permission-hook.test.mjs",
+      "bytes": 23791,
+      "sha256": "42d53744765b0df14fc35090e009b01e031a9bdbb9679cfde08fca7b3b24b84c"
+    },
+    {
+      "file": "tests/desktop-questions.test.mjs",
+      "bytes": 16918,
+      "sha256": "615d110589f01042f31eda9a443158bce1ceeaaefb94d5d9fa26a4b6cb9c8a75"
+    },
+    {
+      "file": "tests/file-delivery-language.test.mjs",
+      "bytes": 974,
+      "sha256": "36f7cbab0568930ac2723f2f0c7d0838baf1b2f47809579b3010968172a95151"
+    },
+    {
+      "file": "tests/first-run-automatic-setup.test.mjs",
+      "bytes": 20502,
+      "sha256": "4c75e577c594004460ec24072de24c03c129f6ae0ecf607638aedb9401f6e0a1"
+    },
+    {
+      "file": "tests/first-run-fixture.mjs",
+      "bytes": 3503,
+      "sha256": "8a3254ca674fd9c252632e8c6dc2ba7b447230a55d21e866b7e79761e9fff254"
+    },
+    {
+      "file": "tests/first-run-native-features.test.mjs",
+      "bytes": 9895,
+      "sha256": "cfd843a81690894e98358aa1e666aeb8336865f21d3c24514cece796fbe68bb8"
+    },
+    {
+      "file": "tests/fixtures/codex/current-account-protocol.json",
+      "bytes": 28913,
+      "sha256": "98554c7edee565d2cf4f9bd42f058206686b306a0a45d92c4c85cca30c7b256b"
+    },
+    {
+      "file": "tests/fixtures/codex/current-profile-protocol.json",
+      "bytes": 17259,
+      "sha256": "e92beb9085193dc23193aa5bd0a440fefdd2802d8c6adf56061f8c2ce336f0fe"
+    },
+    {
+      "file": "tests/fixtures/codex/current-session-protocol.json",
+      "bytes": 208010,
+      "sha256": "d6fd18e3100e1117978cd9a427161b3696efc90fb3a0187a80ae4f493ac72708"
+    },
+    {
+      "file": "tests/fixtures/codex/current-work-protocol.json",
+      "bytes": 18434,
+      "sha256": "8f822431e9863c25a6c542a2f0846700c69e6956b7a0ad38d42b24bf5e064c8d"
+    },
+    {
+      "file": "tests/fixtures/codex/pinned-protocol.json",
+      "bytes": 40111,
+      "sha256": "9194b8325a0422c6af61565a651a95627a2d1381554ce22a2d000fc7cbf79e52"
+    },
+    {
+      "file": "tests/fixtures/codex/reviewed-alpha6-protocol.json",
+      "bytes": 313005,
+      "sha256": "e0d01fb86877dfe33bf43419d33fd06c4de5c9a25479062b2a1072b3908f280a"
+    },
+    {
+      "file": "tests/fixtures/host-event-fixture.mjs",
+      "bytes": 9949,
+      "sha256": "6f3257fdfc6cfa40c350f029a0406b8e9243a80ff77340bd9ed2031644d9cc2e"
+    },
+    {
+      "file": "tests/fixtures/journal-cas-worker.mjs",
+      "bytes": 623,
+      "sha256": "98b0927ea17df2666914bf33ce2c7e7d850bb8b7034f308d45aaaf3813f43f98"
+    },
+    {
+      "file": "tests/fixtures/offline-host-v1-source.json",
+      "bytes": 277,
+      "sha256": "69193e4695ef1dafbe8361845cc8b1b58f3b028ceddfdce1730b02b1fb9912cf"
+    },
+    {
+      "file": "tests/fixtures/offline-host-v1.mjs",
+      "bytes": 15284,
+      "sha256": "0f8a455ff84a51a69eebac64f10149423848f05247da6c1f317a501b53dc4734"
+    },
+    {
+      "file": "tests/fixtures/sqlite-journal-v1.mjs",
+      "bytes": 4221,
+      "sha256": "4705bd4068032e2c7fbc6863ac6d14630149964f8e95c781ccbb597f8ab9ddfe"
+    },
+    {
+      "file": "tests/fixtures/work-store-v1.sql",
+      "bytes": 2803,
+      "sha256": "5633c7cd6d9617040f2fb524f46c08b8c2ceaabb4a13de1f575bdae112f329ef"
+    },
+    {
+      "file": "tests/fixtures/work-store-v2.sql",
+      "bytes": 3608,
+      "sha256": "f6c77cfe59668961476261c9db9814b0134687b74b2eeae312ffc1316f9772da"
+    },
+    {
+      "file": "tests/foundation-fixtures.mjs",
+      "bytes": 1607,
+      "sha256": "6f4e97e678f985f3311d99e2030c4cf1cf6229dd65e03770879b748add4174b5"
+    },
+    {
+      "file": "tests/fresh-bootstrap.test.mjs",
+      "bytes": 4780,
+      "sha256": "87827126531e1e71b90a1fde1cd218404807a089fc4f8a108af0f2df889d06b3"
+    },
+    {
+      "file": "tests/fresh-qq-credential.test.mjs",
+      "bytes": 1554,
+      "sha256": "32051d8536c282f9d29611a53097c1891d4aaa61a4a0d1f7dcd98d634a98e8a4"
+    },
+    {
+      "file": "tests/fresh-user-initialization.test.mjs",
+      "bytes": 4266,
+      "sha256": "5f820395bcea96332686a9736b1813082fb9ec62ffd0ced342e1e4da3be7a189"
+    },
+    {
+      "file": "tests/gateway.test.mjs",
+      "bytes": 5342,
+      "sha256": "2ede5b91b21897b6a031c43fad5fe7e0ef74abc25c2c5fe4fe5c94978a599851"
+    },
+    {
+      "file": "tests/helpers/fresh-context.mjs",
+      "bytes": 2762,
+      "sha256": "49f42e1a8da9a1719c9eb7cea66e1ec8da1abfd2659745073f72e0b771856a59"
+    },
+    {
+      "file": "tests/host-cancel-bridge.test.mjs",
+      "bytes": 35045,
+      "sha256": "83d527caf25716a652bce5bd64c5f46357047be7efbde0d783c06f1e03595a5f"
+    },
+    {
+      "file": "tests/host-event-bridge.test.mjs",
+      "bytes": 23772,
+      "sha256": "927e0e4032908f769f52e5298d92306458bed2c4c31afad7ecbb0bf8eb87493d"
+    },
+    {
+      "file": "tests/host-ingress-retention.test.mjs",
+      "bytes": 31855,
+      "sha256": "4e1397e6dfdd4ee3e159ddac38a052ca5eac71b847fd59c462c6372b4f34883d"
+    },
+    {
+      "file": "tests/host-input-bridge.test.mjs",
+      "bytes": 31234,
+      "sha256": "34f6255e48627da04fffdafb4c5e1bd71ec6b0a9d2e3a4fbfa672ce888e40134"
+    },
+    {
+      "file": "tests/input-coordinator.test.mjs",
+      "bytes": 26867,
+      "sha256": "8b1c94215199d26b1a5725665d8db7804a1777cd6495cf5168214824b89c8e6f"
+    },
+    {
+      "file": "tests/management.test.mjs",
+      "bytes": 20965,
+      "sha256": "a2a5f83262f2e9c9c26afef33b99e09289da94780054efe90539c657bd1f43b6"
+    },
+    {
+      "file": "tests/native-global-integration.test.mjs",
+      "bytes": 21808,
+      "sha256": "e8ea568f97325f0a70987badb47398e2d451fc9668798f1941e87b70e664eefe"
+    },
+    {
+      "file": "tests/native-owner-restore.test.mjs",
+      "bytes": 21086,
+      "sha256": "37fd3ded20e22d28f7fc1644700a4fe488cd5cd33a83bc9f86a2addc88daa6b5"
+    },
+    {
+      "file": "tests/native-session-paths.test.mjs",
+      "bytes": 2569,
+      "sha256": "74c6e68a8b0203aeb51904cae2d8becef9efa798ba9f14fbcf6f8187c666d2ba"
+    },
+    {
+      "file": "tests/observation-only-runtime.test.mjs",
+      "bytes": 5660,
+      "sha256": "c16a144e9181053760cd555a2244d80074fde98317ac79a48c6fd13fdf86d65d"
+    },
+    {
+      "file": "tests/offline-dispatch-host.test.mjs",
+      "bytes": 23022,
+      "sha256": "0fc1cb183a448ac0c5d1ffc4b02f90ef695ab48f59fe1d93159a8c9eefd857fb"
+    },
+    {
+      "file": "tests/pairing-runtime.test.mjs",
+      "bytes": 2563,
+      "sha256": "26a6800073fc918121a892b5880745de8c2efe80b4f22a6db0f779400484aa79"
+    },
+    {
+      "file": "tests/plugin-runtime-path.test.mjs",
+      "bytes": 937,
+      "sha256": "4a9b4aae4f06bd8a5ead196d6d4c660f196e5b8146ebe1c66742e43bb683e23a"
+    },
+    {
+      "file": "tests/preserved-business.test.mjs",
+      "bytes": 230,
+      "sha256": "ad7e1cd9fe64c7badbd36808e80eb50586fb2d5c169fcbe676e4b6efe2cdd09a"
+    },
+    {
+      "file": "tests/preserved/preserved-chat-v1.test.mjs",
+      "bytes": 24270,
+      "sha256": "01d477691f1dccfd3e283a9cb6b0ec1a30da96aaab25ffe6647accef8be90063"
+    },
+    {
+      "file": "tests/preserved/preserved-consolidation.test.mjs",
+      "bytes": 5844,
+      "sha256": "4f4b6ced42575ab66257491875df4e2cf44080252a786daf3cc15d737f530e64"
+    },
+    {
+      "file": "tests/preserved/preserved-modes.test.mjs",
+      "bytes": 17475,
+      "sha256": "4a5ef56a0c3b037a30297ff46ca6e6f9a53a54fb6312f2f1786e191bf3cbb089"
+    },
+    {
+      "file": "tests/project-alias.test.mjs",
+      "bytes": 1309,
+      "sha256": "eda47b700d33fddb0f9daff692c70b4ec6f30e6a28fb7d798f0feea1868dfb0f"
+    },
+    {
+      "file": "tests/qq-approval-clock.test.mjs",
+      "bytes": 3123,
+      "sha256": "5f0eba818058308f3ec7613822067c795199caa3e47a0b23c15041e96f861bac"
+    },
+    {
+      "file": "tests/qq-connection.test.mjs",
+      "bytes": 18107,
+      "sha256": "0a1d4452d2ea42318731d91a13b37e4b77a4f525bd0934c08effdb5f5ab5a7c7"
+    },
+    {
+      "file": "tests/release-package.test.mjs",
+      "bytes": 2927,
+      "sha256": "fc31a6e0d3957633c67d3cbfd3680b1a3dfc334293d789f625d4acd149e054d9"
+    },
+    {
+      "file": "tests/release-source-and-archives.test.mjs",
+      "bytes": 10710,
+      "sha256": "32059b256872a6ae564375748078d2c1a809bff7ad193507f1c52d29130af6ea"
+    },
+    {
+      "file": "tests/remote-approvals.test.mjs",
+      "bytes": 21204,
+      "sha256": "7c73ae0fae419844ee1c6411f560adf6c963be981ae63238d39fdd8cdf267b37"
+    },
+    {
+      "file": "tests/self-test.test.mjs",
+      "bytes": 5239,
+      "sha256": "0b2fec8e6ab520acaa17959b81fa6920d159bd707866818dfcaa790ec5d22b0d"
+    },
+    {
+      "file": "tests/setup-controller.test.mjs",
+      "bytes": 9200,
+      "sha256": "efa19df8598ed6eb34e2ff918092220ef70ae4df1f9ea7a1fe296b52aa2f67c0"
+    },
+    {
+      "file": "tests/setup-http.test.mjs",
+      "bytes": 5733,
+      "sha256": "8a416e894da631b971b2aeed5365ff1f003557f66c3efb09dd8ba6dc08e731e9"
+    },
+    {
+      "file": "tests/sqlite-journal.test.mjs",
+      "bytes": 5586,
+      "sha256": "6e7b02710bf253f90342ce2e7b8f8f150b1aec1d85ed55b64c64a30e9c080df1"
+    },
+    {
+      "file": "tests/team-business-health.test.mjs",
+      "bytes": 3853,
+      "sha256": "aeafde79f582f0cacef2a8fff34f0853a0c75fd7ea8889b6c8d0f9af8f39d946"
+    },
+    {
+      "file": "tests/team-management-ui.test.mjs",
+      "bytes": 7931,
+      "sha256": "700b241546a71bcae42b4aec58c5ac63cc4e25bed23de0ef36f8805c3a9ce156"
+    },
+    {
+      "file": "tests/team-native-files.test.mjs",
+      "bytes": 15410,
+      "sha256": "46fd25c80b08c72a8895ec37662b0b3b5e58d80af5b6328e7fee53c6ed709ef8"
+    },
+    {
+      "file": "tests/team-native-observer.test.mjs",
+      "bytes": 11803,
+      "sha256": "335bf4f08d8da4e96a4c23670adb40d4a19056aef3053504345786478e3196e7"
+    },
+    {
+      "file": "tests/team-native-question-sources.test.mjs",
+      "bytes": 6343,
+      "sha256": "c40fb6e2b4e183594a7207d521646d417ca3063d5756b71aca9e4ecd23e583f9"
+    },
+    {
+      "file": "tests/tool-status.test.mjs",
+      "bytes": 8803,
+      "sha256": "874c414f5b0075195d561307771327a45127440ea562aab4c5552d1e140de3a7"
+    },
+    {
+      "file": "tests/transport-lifecycle.test.mjs",
+      "bytes": 15435,
+      "sha256": "89fc1597b5a76be28b1e2a3372015e1578a79c4c16c18aafc96bd71ea5fc2f84"
+    },
+    {
+      "file": "tests/user-data-transfer.test.mjs",
+      "bytes": 10100,
+      "sha256": "ee9cabd7151cd83b490b06edba65efadf0f97430062b7e644c9001cb4f90494d"
+    },
+    {
+      "file": "tests/windows-known-folders.test.mjs",
+      "bytes": 1781,
+      "sha256": "1b65ba2d1007715d2f19acdac01a9caae00dbf4710f0357f3de384e019339a1a"
+    },
+    {
+      "file": "tests/work-store.test.mjs",
+      "bytes": 19749,
+      "sha256": "bce89a9b296956fb377dbc991b784c9384ac1543d2a6c2f72a542553e7a39397"
+    },
+    {
+      "file": "停止管理界面.cmd",
+      "bytes": 133,
+      "sha256": "1fb6bfb91dd3d94c5a67ae442bd7d30c02e2ce1d3c5e592657c74d30250371f7"
+    },
+    {
+      "file": "安装.cmd",
+      "bytes": 141,
+      "sha256": "b65c03856e60909b66e391314bab80d21edebe9bb3dfe52ff43f482e4509489c"
+    },
+    {
+      "file": "打开管理界面.cmd",
+      "bytes": 147,
+      "sha256": "082ad6ba1b6d0d3e4727b72d5e38fca3bbabcd2c9602dfc545598820d723fb50"
+    }
+  ]
+}

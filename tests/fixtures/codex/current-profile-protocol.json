@@ -1,0 +1,527 @@
+{
+  "protocolVersion": "codex-app-server/0.164.0-alpha.11.1",
+  "experimental": true,
+  "source": "Installed CLI generated experimental schema; no private data",
+  "rawSha256": {
+    "initialize": "b55124e7c0f36a1789396daa5578217a92be67f053903696236686e59f6f212e",
+    "config": "257c54a423b47c1d209ff1076765a1564d82322fd5161670fd489a2874de1bac",
+    "mcp": "30b978c6502b37c9f0002aeba241f41c91d4c6adf0f92d89242b62ffde415a2d",
+    "profiles": "576d405f6c94cbde982a9f65c9301717043683b83ca35d564247907feb16b1b4",
+    "profileResponse": "4a290b5b9d47c2fc671033e22754671161bc563027ba387e861bd935398f0def",
+    "exec": "fd034b4c85d7b6f466e30a3cbb73db86be1263aca3f81b89b547f14817dfb62e",
+    "execResponse": "dec52d187121e8dd48124b47a4a8d8428ef3717b98b9200345bb404f73b62c9d"
+  },
+  "schemas": {
+    "initialize": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "definitions": {
+        "ClientInfo": {
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "title": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "version": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "name",
+            "version"
+          ],
+          "type": "object"
+        },
+        "InitializeCapabilities": {
+          "description": "Client-declared capabilities negotiated during initialize.",
+          "properties": {
+            "experimentalApi": {
+              "default": false,
+              "description": "Opt into receiving experimental API methods and fields.",
+              "type": "boolean"
+            },
+            "explicitGatewayOauth": {
+              "description": "Use explicit gateway OAuth login instead of automatic browser authorization. Applies to this app-server's gateway runtime; later connections cannot undo it.",
+              "type": "boolean"
+            },
+            "extensions": {
+              "additionalProperties": true,
+              "description": "MCP extension settings declared by the app-server client.",
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "mcpServerOpenaiFormElicitation": {
+              "description": "Legacy opt-in for the `openai/form` MCP extension.\n\nNew clients should declare `openai/form` in [`Self::extensions`].",
+              "type": "boolean"
+            },
+            "optOutNotificationMethods": {
+              "description": "Exact notification method names that should be suppressed for this connection (for example `thread/started`).",
+              "items": {
+                "type": "string"
+              },
+              "type": [
+                "array",
+                "null"
+              ]
+            },
+            "requestAttestation": {
+              "default": false,
+              "description": "Opt into `attestation/generate` requests for upstream `x-oai-attestation`.",
+              "type": "boolean"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "properties": {
+        "capabilities": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/InitializeCapabilities"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "clientInfo": {
+          "$ref": "#/definitions/ClientInfo"
+        }
+      },
+      "required": [
+        "clientInfo"
+      ],
+      "title": "InitializeParams",
+      "type": "object"
+    },
+    "config": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "properties": {
+        "cwd": {
+          "description": "Optional working directory to resolve project config layers. If specified, return the effective config as seen from that directory (i.e., including any project layers between `cwd` and the project/repo root).",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "includeLayers": {
+          "type": "boolean"
+        }
+      },
+      "title": "ConfigReadParams",
+      "type": "object"
+    },
+    "mcp": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "definitions": {
+        "McpServerStatusDetail": {
+          "enum": [
+            "full",
+            "toolsAndAuthOnly"
+          ],
+          "type": "string"
+        }
+      },
+      "properties": {
+        "cursor": {
+          "description": "Opaque pagination cursor returned by a previous call.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "detail": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/McpServerStatusDetail"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Controls how much MCP inventory data to fetch for each server. Defaults to `Full` when omitted."
+        },
+        "limit": {
+          "description": "Optional page size; defaults to a server-defined value.",
+          "format": "uint32",
+          "minimum": 0,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "serverName": {
+          "description": "Limit discovery to one server. With a thread ID, reuse that thread's MCP connection.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "threadId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "title": "ListMcpServerStatusParams",
+      "type": "object"
+    },
+    "profiles": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "properties": {
+        "cursor": {
+          "description": "Opaque pagination cursor returned by a previous call.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "cwd": {
+          "description": "Optional working directory to resolve project config layers.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "limit": {
+          "description": "Optional page size; defaults to the full result set.",
+          "format": "uint32",
+          "minimum": 0,
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
+      },
+      "title": "PermissionProfileListParams",
+      "type": "object"
+    },
+    "profileResponse": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "definitions": {
+        "PermissionProfileSummary": {
+          "properties": {
+            "allowed": {
+              "description": "Whether the effective requirements allow selecting this profile.",
+              "type": "boolean"
+            },
+            "description": {
+              "description": "Optional user-facing description for display in clients.",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "id": {
+              "description": "Available permission profile identifier.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "allowed",
+            "id"
+          ],
+          "type": "object"
+        }
+      },
+      "properties": {
+        "data": {
+          "items": {
+            "$ref": "#/definitions/PermissionProfileSummary"
+          },
+          "type": "array"
+        },
+        "nextCursor": {
+          "description": "Opaque cursor to pass to the next call to continue after the last item. If None, there are no more items to return.",
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "data"
+      ],
+      "title": "PermissionProfileListResponse",
+      "type": "object"
+    },
+    "exec": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "definitions": {
+        "AbsolutePathBuf": {
+          "description": "A path that is guaranteed to be absolute and normalized (though it is not guaranteed to be canonicalized or exist on the filesystem).\n\nIMPORTANT: When deserializing an `AbsolutePathBuf`, a base path must be set using [AbsolutePathBufGuard::new]. If no base path is set, the deserialization will fail unless the path being deserialized is already absolute.",
+          "type": "string"
+        },
+        "CommandExecTerminalSize": {
+          "description": "PTY size in character cells for `command/exec` PTY sessions.",
+          "properties": {
+            "cols": {
+              "description": "Terminal width in character cells.",
+              "format": "uint16",
+              "minimum": 0,
+              "type": "integer"
+            },
+            "rows": {
+              "description": "Terminal height in character cells.",
+              "format": "uint16",
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          "required": [
+            "cols",
+            "rows"
+          ],
+          "type": "object"
+        },
+        "NetworkAccess": {
+          "enum": [
+            "restricted",
+            "enabled"
+          ],
+          "type": "string"
+        },
+        "SandboxPolicy": {
+          "oneOf": [
+            {
+              "properties": {
+                "type": {
+                  "enum": [
+                    "dangerFullAccess"
+                  ],
+                  "title": "DangerFullAccessSandboxPolicyType",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type"
+              ],
+              "title": "DangerFullAccessSandboxPolicy",
+              "type": "object"
+            },
+            {
+              "properties": {
+                "networkAccess": {
+                  "default": false,
+                  "type": "boolean"
+                },
+                "type": {
+                  "enum": [
+                    "readOnly"
+                  ],
+                  "title": "ReadOnlySandboxPolicyType",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type"
+              ],
+              "title": "ReadOnlySandboxPolicy",
+              "type": "object"
+            },
+            {
+              "properties": {
+                "networkAccess": {
+                  "allOf": [
+                    {
+                      "$ref": "#/definitions/NetworkAccess"
+                    }
+                  ],
+                  "default": "restricted"
+                },
+                "type": {
+                  "enum": [
+                    "externalSandbox"
+                  ],
+                  "title": "ExternalSandboxSandboxPolicyType",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type"
+              ],
+              "title": "ExternalSandboxSandboxPolicy",
+              "type": "object"
+            },
+            {
+              "properties": {
+                "excludeSlashTmp": {
+                  "default": false,
+                  "type": "boolean"
+                },
+                "excludeTmpdirEnvVar": {
+                  "default": false,
+                  "type": "boolean"
+                },
+                "networkAccess": {
+                  "default": false,
+                  "type": "boolean"
+                },
+                "type": {
+                  "enum": [
+                    "workspaceWrite"
+                  ],
+                  "title": "WorkspaceWriteSandboxPolicyType",
+                  "type": "string"
+                },
+                "writableRoots": {
+                  "default": [],
+                  "items": {
+                    "$ref": "#/definitions/AbsolutePathBuf"
+                  },
+                  "type": "array"
+                }
+              },
+              "required": [
+                "type"
+              ],
+              "title": "WorkspaceWriteSandboxPolicy",
+              "type": "object"
+            }
+          ]
+        }
+      },
+      "description": "Run a standalone command (argv vector) in the server sandbox without creating a thread or turn.\n\nThe final `command/exec` response is deferred until the process exits and is sent only after all `command/exec/outputDelta` notifications for that connection have been emitted.",
+      "properties": {
+        "command": {
+          "description": "Command argv vector. Empty arrays are rejected.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "cwd": {
+          "description": "Optional working directory. Defaults to the server cwd.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "disableOutputCap": {
+          "description": "Disable stdout/stderr capture truncation for this request.\n\nCannot be combined with `outputBytesCap`.",
+          "type": "boolean"
+        },
+        "disableTimeout": {
+          "description": "Disable the timeout entirely for this request.\n\nCannot be combined with `timeoutMs`.",
+          "type": "boolean"
+        },
+        "env": {
+          "additionalProperties": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "description": "Optional environment overrides merged into the server-computed environment.\n\nMatching names override inherited values. Set a key to `null` to unset an inherited variable.",
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "outputBytesCap": {
+          "description": "Optional per-stream stdout/stderr capture cap in bytes.\n\nWhen omitted, the server default applies. Cannot be combined with `disableOutputCap`.",
+          "format": "uint",
+          "minimum": 0,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "permissionProfile": {
+          "description": "Optional active permissions profile id for this command.\n\nDefaults to the user's configured permissions when omitted. Cannot be combined with `sandboxPolicy`.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "processId": {
+          "description": "Optional client-supplied, connection-scoped process id.\n\nRequired for `tty`, `streamStdin`, `streamStdoutStderr`, and follow-up `command/exec/write`, `command/exec/resize`, and `command/exec/terminate` calls. When omitted, buffered execution gets an internal id that is not exposed to the client.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sandboxPolicy": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/SandboxPolicy"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Optional sandbox policy for this command.\n\nUses the same shape as thread/turn execution sandbox configuration and defaults to the user's configured policy when omitted. Cannot be combined with `permissionProfile`."
+        },
+        "size": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/CommandExecTerminalSize"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Optional initial PTY size in character cells. Only valid when `tty` is true."
+        },
+        "streamStdin": {
+          "description": "Allow follow-up `command/exec/write` requests to write stdin bytes.\n\nRequires a client-supplied `processId`.",
+          "type": "boolean"
+        },
+        "streamStdoutStderr": {
+          "description": "Stream stdout/stderr via `command/exec/outputDelta` notifications.\n\nStreamed bytes are not duplicated into the final response and require a client-supplied `processId`.",
+          "type": "boolean"
+        },
+        "timeoutMs": {
+          "description": "Optional timeout in milliseconds.\n\nWhen omitted, the server default applies. Cannot be combined with `disableTimeout`.",
+          "format": "int64",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "tty": {
+          "description": "Enable PTY mode.\n\nThis implies `streamStdin` and `streamStdoutStderr`.",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "command"
+      ],
+      "title": "CommandExecParams",
+      "type": "object"
+    },
+    "execResponse": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "description": "Final buffered result for `command/exec`.",
+      "properties": {
+        "exitCode": {
+          "description": "Process exit code.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "stderr": {
+          "description": "Buffered stderr capture.\n\nEmpty when stderr was streamed via `command/exec/outputDelta`.",
+          "type": "string"
+        },
+        "stdout": {
+          "description": "Buffered stdout capture.\n\nEmpty when stdout was streamed via `command/exec/outputDelta`.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "exitCode",
+        "stderr",
+        "stdout"
+      ],
+      "title": "CommandExecResponse",
+      "type": "object"
+    }
+  }
+}

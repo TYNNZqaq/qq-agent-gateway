@@ -1,0 +1,23 @@
+import {sha256} from './boundaries.mjs';
+import {nativeCatalogSnapshot,nativeGlobalEnabled} from './native-desktop-scope.mjs';
+export const nativeOwnerEnabled=config=>config.nativeDesktopControl?.enabled===true&&config.nativeDesktopControl.transport==='codex-ipc'&&nativeGlobalEnabled(config);
+export const nativeOwnerScope=(store,config)=>sha256(JSON.stringify({schemaVersion:1,instanceId:config.instanceId,hostId:config.hostId,runtimeRoot:config.runtimeRoot||config.stateDir,owner:store.get('owner'),appId:config.qq.appId,binding:config.binding,home:config.desktopNotifications?.home,transport:'codex-ipc'}));
+export function nativeControlTarget(store,config,threadId){if(!nativeOwnerEnabled(config))return null;const row=nativeCatalogSnapshot(store,config)?.threads?.find(row=>row.id===threadId);return row&&!row.archived&&!row.verificationError?row:null;}
+export function nativeControlAvailable(store,config,threadId,now=Date.now()){
+ if(!nativeControlTarget(store,config,threadId))return false;const state=store.get('nativeOwnerThread:'+threadId);return state?.scope===nativeOwnerScope(store,config)&&state.available===true&&state.streamVersion===11&&now>=state.checkedAt&&now-state.checkedAt<=15000;
+}
+export function nativeTurns(state){
+ const map=new Map(),history=state?.turnHistory?.history,turns=[...(Array.isArray(state?.turns)?state.turns:[]),...(Array.isArray(history)?history:Object.values(history?.entitiesByKey||{}))];
+ for(const turn of turns){const id=turn?.turnId||turn?.id;if(typeof id!=='string')continue;const old=map.get(id),items=new Map();for(const item of [...(old?.items||[]),...(turn.items||[])])if(item&&typeof item==='object')items.set(item.id||JSON.stringify(item),item);map.set(id,{...old,...turn,turnId:id,status:old&&['completed','failed','interrupted'].includes(old.status)?old.status:turn.status,items:[...items.values()]});}return [...map.values()];
+}
+export function nativeActiveTurn(state){const active=nativeTurns(state).filter(t=>t.status==='inProgress');return active.length===1?active[0].turnId:null;}
+function replies(turn){return (turn.items||[]).flatMap(item=>{const content=item.type==='userMessage'?item.content:item.type==='steeringUserMessage'&&item.status==='accepted'?item.input:null;if(!Array.isArray(content)||content.length!==1||content[0]?.type!=='text')return [];const match=/^<send_user_message_question_reply>\s*([\s\S]+)\s*<\/send_user_message_question_reply>$/.exec(content[0].text?.trim()||'');if(!match||match[1].length>65536)return [];try{const value=JSON.parse(match[1]);return Array.isArray(value)?value:[];}catch{return [];}});}
+export function nativeQuestionGroups(state){
+ const turns=nativeTurns(state),groups=[];
+ for(const request of state.requests||[]){const p=request?.params;if(request.method!=='item/tool/requestUserInput'||request.completed===true||p?.threadId!==state.id||typeof p.itemId!=='string'||!['string','number'].includes(typeof request.id)||!Array.isArray(p.questions)||!turns.some(t=>t.turnId===p.turnId&&t.status==='inProgress'))continue;
+  groups.push({kind:'sync',callId:p.itemId,requestId:request.id,turnId:p.turnId,questions:p.questions.map((q,index)=>({id:q.id,index,text:q.question,options:q.options||[],secret:q.isSecret===true})),fingerprint:sha256(JSON.stringify([request.method,request.id,p.threadId,p.turnId,p.itemId,p.questions]))});
+ }
+ for(const turn of turns.filter(t=>t.status==='inProgress')){const answered=new Set(replies(turn).map(r=>r.questionItemId));for(const item of turn.items||[]){if(item.type!=='agentMessage'||typeof item.id!=='string'||!Array.isArray(item.questions))continue;const questions=item.questions.flatMap((q,index)=>{const questionItemId=JSON.stringify(['request_user_input_async',item.id,index]);return answered.has(questionItemId)?[]:[{id:typeof q.id==='string'?q.id:'question_'+index,index,text:q.title,options:q.options||[],secret:q.isSecret===true,questionItemId}];});if(questions.length)groups.push({kind:'async',callId:item.id,requestId:item.id,turnId:turn.turnId,questions,fingerprint:sha256(JSON.stringify([turn.turnId,item.id,item.questions]))});}}
+ return groups;
+}
+export function nativeAnswerRecorded(state,entry,answers){const turn=nativeTurns(state).find(t=>t.turnId===entry.turnId);if(!turn)return false;if(entry.kind==='async')return entry.questions.every(q=>replies(turn).some(r=>r.questionItemId===q.questionItemId&&r.answer===answers[q.id]));return (turn.items||[]).some(item=>item.type==='userInputResponse'&&item.completed===true&&JSON.stringify(item.requestId)===JSON.stringify(entry.requestId)&&entry.questions.every(q=>JSON.stringify(Array.isArray(item.answers?.[q.id])?item.answers[q.id]:item.answers?.[q.id]?.answers)===JSON.stringify([answers[q.id]])));}
